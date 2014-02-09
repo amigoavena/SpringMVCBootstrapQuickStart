@@ -1,5 +1,7 @@
 package org.lithium.controller;
 
+import java.util.Locale;
+
 import org.lithium.dto.MessageDTO;
 import org.lithium.service.HelloWorldService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +44,11 @@ public class IndexController {
     @ResponseBody
     public MessageDTO getMessage(){
     	return service.getMessage();
+    }
+    
+    @RequestMapping(value="/getLocale", method=RequestMethod.GET)
+    @ResponseBody
+    public Locale getlocale(Locale local){
+    	return local;
     }
 }
