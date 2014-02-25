@@ -5,6 +5,8 @@ import java.util.Locale;
 import org.lithium.dto.MessageDTO;
 import org.lithium.service.HelloWorldService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,5 +52,14 @@ public class IndexController {
     @ResponseBody
     public Locale getlocale(Locale local){
     	return local;
+    }
+    
+    @MessageMapping("/hello")
+    @SendTo("/topic/greetings")
+    public MessageDTO greeting(MessageDTO message) throws Exception {
+        Thread.sleep(3000); // simulated delay
+        MessageDTO messageResult = new MessageDTO();
+        messageResult.setMessage(message.getMessage());
+        return messageResult;
     }
 }
