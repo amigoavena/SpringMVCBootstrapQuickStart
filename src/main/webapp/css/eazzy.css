@@ -1,0 +1,49 @@
+body {
+	background: black;
+}
+
+.menu-item-row1 {
+	background:white;
+	min-height: 220px;
+	padding-top: .5%;
+	margin: 3px 3px 3px 3px;
+}
+
+menu-inner-item {
+	padding-top: .5%;
+	min-height: 140px;
+	margin: 3px 3px 3px 3px;
+}
+
+.menu-item-row2 {
+	min-height: 310px;
+	margin: 3px 3px 3px 3px;
+}
+
+.menu-item-row2-1 {
+	min-height: 310px;
+	padding:0;
+	margin: 3px 3px 3px 3px;
+}
+
+.menu-item-row2-1 {
+	min-height: 310px;
+	padding:0;
+	margin: 3px 3px 3px 3px;
+}
+
+.item-register{
+	background: white;
+}
+
+.menu-inner-item-top {
+	margin: 1px 5px 3px 1px;
+	background: white;
+	min-height: 152px;
+}
+
+.menu-inner-item-bottom {
+	margin: 3px 5px 3px 0px;
+	background: white;
+	min-height: 152px;
+}
