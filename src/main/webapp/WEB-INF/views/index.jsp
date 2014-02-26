@@ -70,24 +70,28 @@
 	<div class="container theme-showcase" role="main">
 
 		<div class="row">
-			<div class="col-md-12">
-				<h1>.col-md-6</h1>
+			<div class="col-md-6">
+				<div class="form-group">
+					<button id="connect" class="btn btn-primary">Connect</button>
+					<button id="disconnect" disabled="disabled" class="btn btn-danger">Disconnect</button>
+				</div>
+			</div>
+		</div>
+		<div id="conversationDiv" class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label>What is your name?</label><input type="text" id="name"
+						class="form-control" />
+				</div>
+				<button type="button" id="sendName" class="btn btn-info">Send</button>
 			</div>
 		</div>
 
+		<div class="page-header">
+			<h2>Scores</h2>
+		</div>
 		<div class="row">
-			<div class="col-md-6">.col-md-6</div>
-			<div class="col-md-6">.col-md-6</div>
-		</div>
-
-		<div>
-			<button id="connect" onclick="connect();" class="btn btn-default">Connect</button>
-			<button id="disconnect" disabled="disabled" onclick="disconnect();" class="btn btn-default">Disconnect</button>
-		</div>
-		<div id="conversationDiv">
-			<label>What is your name?</label><input type="text" id="name" />
-			<button id="sendName" onclick="sendName();">Send</button>
-			<p id="response"></p>
+			<div id="response" class="col-md-6"></div>
 		</div>
 
 	</div>
@@ -103,7 +107,22 @@
 	<script src="js/sockjs-0.3.4.js"></script>
 	<script src="js/stomp.js"></script>
 	<script type="text/javascript">
-		var stompClient = null;
+		$(document)
+				.ready(
+						function() {
+							var stompClient = null;
+							console.log("ready!");
+							$("#sendName").click(function() {
+								sendName();
+							});
+							$("#disconnect").click(function() {
+								disconnect();
+							});
+							$("#connect").click(function() {
+								connect();
+							});
+							document.getElementById('conversationDiv').style.visibility = 'hidden';
+						});
 
 		function setConnected(connected) {
 			document.getElementById('connect').disabled = connected;
