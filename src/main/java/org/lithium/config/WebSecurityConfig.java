@@ -23,14 +23,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/css/**").antMatchers("/js/**")
+		web.ignoring().antMatchers("/**").antMatchers("/js/**")
 				.antMatchers("/fonts/**");
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
-				.anyRequest().permitAll().and().formLogin().permitAll();
+		http.authorizeRequests()
+				.anyRequest().permitAll();
 	}
 
 }

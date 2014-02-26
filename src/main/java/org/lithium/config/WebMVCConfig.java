@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @ComponentScan(basePackages = { "org.lithium.controller" })
 public class WebMVCConfig extends WebMvcConfigurationSupport {
-	
+
 	@Override
 	public void configureDefaultServletHandling(
 			DefaultServletHandlerConfigurer configurer) {
@@ -33,16 +33,16 @@ public class WebMVCConfig extends WebMvcConfigurationSupport {
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
 	}
-	
+
 	@Override
 	public void addInterceptors(final InterceptorRegistry registry) {
-		//logger.debug("addInterceptors");
+		// logger.debug("addInterceptors");
 		// Default name of the locale specification parameter: "locale".
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
 		localeChangeInterceptor.setParamName("lang");
 		registry.addInterceptor(localeChangeInterceptor);
 	}
-	
+
 	@Bean
 	public MessageSource messageSource() {
 
@@ -53,14 +53,11 @@ public class WebMVCConfig extends WebMvcConfigurationSupport {
 
 		return messageSource;
 	}
-	
 
 	@Bean
 	public LocaleResolver localeResolver() {
-
 		SessionLocaleResolver lr = new org.springframework.web.servlet.i18n.SessionLocaleResolver();
 		lr.setDefaultLocale(Locale.ENGLISH);
-
 		return lr;
 	}
 
