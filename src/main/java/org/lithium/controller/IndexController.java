@@ -18,48 +18,48 @@ public class IndexController {
 
 	@Autowired
 	private HelloWorldService service;
-	
+
 	@RequestMapping(value = "/test")
 	public String test() {
 		return "index";
 	}
-	
+
 	@RequestMapping(value = "/admin/andale")
 	public String test1() {
 		return "index";
 	}
-	
-    @RequestMapping(value = "/")
-    public String displayHome() {
-        return "index";
-    }
-    
-    @RequestMapping(value="/tomala")
-    public ModelAndView gettest(){
-    	ModelAndView mv = new ModelAndView();
-    	mv.setViewName("index");
-    	mv.addObject("message",service.getmessage());
-    	return mv;
-    }
-    
-    @RequestMapping(value="/message", method=RequestMethod.GET)
-    @ResponseBody
-    public MessageDTO getMessage(){
-    	return service.getMessage();
-    }
-    
-    @RequestMapping(value="/getLocale", method=RequestMethod.GET)
-    @ResponseBody
-    public Locale getlocale(Locale local){
-    	return local;
-    }
-    
-    @MessageMapping("/hello")
-    @SendTo("/topic/greetings")
-    public MessageDTO greeting(MessageDTO message) throws Exception {
-        Thread.sleep(3000); // simulated delay
-        MessageDTO messageResult = new MessageDTO();
-        messageResult.setMessage(message.getMessage());
-        return messageResult;
-    }
+
+	@RequestMapping(value = "/")
+	public String displayHome() {
+		return "index";
+	}
+
+	@RequestMapping(value = "/tomala")
+	public ModelAndView gettest() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("index");
+		mv.addObject("message", service.getmessage());
+		return mv;
+	}
+
+	@RequestMapping(value = "/message", method = RequestMethod.GET)
+	@ResponseBody
+	public MessageDTO getMessage() {
+		return service.getMessage();
+	}
+
+	@RequestMapping(value = "/getLocale", method = RequestMethod.GET)
+	@ResponseBody
+	public Locale getlocale(Locale local) {
+		return local;
+	}
+
+	@MessageMapping("/hello")
+	@SendTo("/topic/greetings")
+	public MessageDTO greeting(MessageDTO message) throws Exception {
+		Thread.sleep(3000); // simulated delay
+		MessageDTO messageResult = new MessageDTO();
+		messageResult.setMessage(message.getMessage());
+		return messageResult;
+	}
 }
