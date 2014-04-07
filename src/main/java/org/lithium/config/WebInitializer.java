@@ -7,7 +7,7 @@ public class WebInitializer extends
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] { WebSecurityConfig.class, AppConfig.class };
+		return new Class[] { WebSecurityConfig.class, AppConfig.class, PersistenceConfig.class };
 	}
 
 	@Override

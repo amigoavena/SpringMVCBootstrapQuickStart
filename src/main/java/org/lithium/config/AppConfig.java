@@ -12,10 +12,4 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 @ComponentScan(basePackages = { "org.lithium.service" })
 public class AppConfig {
 
-	@Bean
-	public DataSource dataSource() {
-		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
-				.addScript("sql/initial.sql").build();
-	}
-
 }
