@@ -44,6 +44,14 @@ public class IndexController {
 		mv.addObject("message", service.getmessage());
 		return mv;
 	}
+	
+	@RequestMapping(value = "/index")
+	public ModelAndView indexView() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("index");
+		mv.addObject("message", service.getmessage());
+		return mv;
+	}
 
 	@RequestMapping(value = "/message", method = RequestMethod.GET)
 	@ResponseBody
