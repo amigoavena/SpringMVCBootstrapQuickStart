@@ -67,6 +67,7 @@ define([
 
 		buildSportTable : function() {
 			console.log("buildSportTable");
+			$('#sportList').html('');
 			for ( var k in this.sports) {
 				var sport = this.sports[k];
 				console.log(sport);
