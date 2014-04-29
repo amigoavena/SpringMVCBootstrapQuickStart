@@ -15,3 +15,18 @@ create table matches(
  teamAwayId varchar(50),
  matchDate timestamp, -- needs to be with time zone for matches.
 );
+
+create table matchInfo(
+ matchId varchar(50),
+ referee varchar(50), --- user ID
+ placeId varchar(50), --- place ID
+ matchDate timestamp, -- needs to be with time zone for matches.
+);
+
+create table places(
+ placeId varchar(50),
+ placeName varchar(250),
+ city varchar(150),
+ state varchar(150),
+ country varchar(150)
+);

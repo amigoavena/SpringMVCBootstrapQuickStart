@@ -7,6 +7,7 @@ import org.lithium.dto.MessageDTO;
 import org.lithium.persistence.domain.Match;
 import org.lithium.service.HelloWorldService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
+	@Autowired
+	private MessageSendingOperations<String> messagingTemplate;
 
 	@Autowired
 	private HelloWorldService service;
@@ -74,6 +77,9 @@ public class IndexController {
 	@RequestMapping(value = "/saveMatch", method = RequestMethod.GET)
 	@ResponseBody
 	public Match saveMatch() {
+		MessageDTO messageResult = new MessageDTO();
+		messageResult.setMessage("pos andale");
+		messagingTemplate.convertAndSend("/topic/match/1",messageResult);
 		return service.saveMatch();
 	}
 
@@ -84,4 +90,13 @@ public class IndexController {
 		messageResult.setMessage(message.getMessage());
 		return messageResult;
 	}
+	
+	@MessageMapping("/matches")
+	public MessageDTO matches(MessageDTO message) throws Exception {
+		MessageDTO messageResult = new MessageDTO();
+		messageResult.setMessage(message.getMessage());
+		messagingTemplate.convertAndSend("/topic/match/1",message);
+		return messageResult;
+	}
+	
 }

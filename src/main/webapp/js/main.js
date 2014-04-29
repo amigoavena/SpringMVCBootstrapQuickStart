@@ -1,7 +1,7 @@
 // Filename: app.js
 var APP = APP || {
 	'User' : [],
-	'Common' : [],
+	'Commons' : [],
 	'Config' : []
 };
 
@@ -56,7 +56,7 @@ require.config(REQJS_CONF);
 
 requirejs([ 'commons', 'router' ], function(Commons, Router) {
 
-	_.extend(APP.Common, new Commons());
+	_.extend(APP.Commons, new Commons());
 	
 	APP.Router = new Object();
 	_.extend(APP.Router, new Router());

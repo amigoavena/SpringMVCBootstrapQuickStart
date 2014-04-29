@@ -3,10 +3,14 @@ define([
 // which will be used as our views primary template
 'text!templates/match.html', 'stomp', 'sockjs', 'notify', 'growl' ], function(
 		compiledTemplate, Stomp, SockJS) {
+	
+	var c = APP.Commons;
+	
 	var Match = Backbone.View.extend({
 
 		stompClient : null,
 		socket : null,
+		id: null,
 
 		render : function() {
 			console.log("rendering!");
@@ -14,30 +18,34 @@ define([
 			console.log("rendered");
 		},
 
-		initialize : function() {
+		initialize : function(params) {
 			var self = this;
-			console.log("match initialized");
+			//console.log(params.data.id);
+			if(!c.isEmpty(params)){
+				this.id = params.data.id;
+			}
 			this.render();
 			this.socket = new SockJS('hello');
 			stompClient = Stomp.over(this.socket);
 			stompClient.connect({}, function(frame) {
 				// setConnected(true);
 				console.log('Connected: ' + frame);
-				stompClient.subscribe('/topic/greetings', function(greeting) {
+				console.log('subscribing to matchId:'+self.id);
+				stompClient.subscribe('/topic/match/'+self.id, function(greeting) {
 					console.log(greeting);
 					self.showGreeting(JSON.parse(greeting.body).message);
 				});
 			});
-
 			$("#sendName", this.el).click(function() {
 				self.sendName();
 			});
+			console.log("match initialized");
 		},
 
 		sendName : function() {
 			var name = $('#name', this.el).val();
 			console.log(name);
-			stompClient.send("/app/hello", {}, JSON.stringify({
+			stompClient.send("/app/matches", {}, JSON.stringify({
 				'message' : name,
 				'from' : 'test'
 			}));
