@@ -30,3 +30,25 @@ create table places(
  state varchar(150),
  country varchar(150)
 );
+
+create table sport(
+	sportId varchar(50),
+	sportName varchar(150)
+);
+
+create table teams(
+ teamId varchar(50),
+ teamName varchar(250),
+ leagueId varchar(200),
+ imageLocation varchar(200),
+ description varchar(250)
+);
+
+create table league(
+ leagueId varchar(50),
+ leagueName varchar(150),
+ sportId varchar(50),
+ address varchar(250),
+ address2 varchar(250)
+);
+

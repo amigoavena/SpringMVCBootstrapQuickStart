@@ -1,10 +1,8 @@
 package org.lithium.controller;
 
-import java.util.List;
 import java.util.Locale;
 
 import org.lithium.dto.MessageDTO;
-import org.lithium.persistence.domain.Match;
 import org.lithium.service.HelloWorldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.core.MessageSendingOperations;
@@ -67,35 +65,12 @@ public class IndexController {
 	public Locale getlocale(Locale local) {
 		return local;
 	}
-	
-	@RequestMapping(value = "/getMatches", method = RequestMethod.GET)
-	@ResponseBody
-	public List getMatches() {
-		return service.getMatches();
-	}
-	
-	@RequestMapping(value = "/saveMatch", method = RequestMethod.GET)
-	@ResponseBody
-	public Match saveMatch() {
-		MessageDTO messageResult = new MessageDTO();
-		messageResult.setMessage("pos andale");
-		messagingTemplate.convertAndSend("/topic/match/1",messageResult);
-		return service.saveMatch();
-	}
 
 	@MessageMapping("/hello")
 	@SendTo("/topic/greetings")
 	public MessageDTO greeting(MessageDTO message) throws Exception {
 		MessageDTO messageResult = new MessageDTO();
 		messageResult.setMessage(message.getMessage());
-		return messageResult;
-	}
-	
-	@MessageMapping("/matches")
-	public MessageDTO matches(MessageDTO message) throws Exception {
-		MessageDTO messageResult = new MessageDTO();
-		messageResult.setMessage(message.getMessage());
-		messagingTemplate.convertAndSend("/topic/match/1",message);
 		return messageResult;
 	}
 	

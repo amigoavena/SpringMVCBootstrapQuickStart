@@ -8,6 +8,7 @@ define([ 'jquery', 'backbone', 'underscore', 'bootstrap' ], function($,
 
 	// Disable ajax cache.
 	$.ajaxSetup({
+		contentType: "application/json; charset=utf-8",
 		cache : false
 	});
 

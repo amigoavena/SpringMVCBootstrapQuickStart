@@ -6,6 +6,8 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.lithium.dto.MessageDTO;
 import org.lithium.persistence.domain.Match;
+import org.lithium.persistence.domain.Sport;
+import org.lithium.persistence.domain.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,11 +26,54 @@ public class HelloWorldService {
 		return new MessageDTO();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Match> getMatches() {
-		List results = sessionFactory.getCurrentSession()
+		List<Match> results = sessionFactory.getCurrentSession()
 				.createQuery("from Match").list();
 		return results;
+	}
+
+	@Transactional
+	public Sport saveSport(Sport sport) {
+		sessionFactory.getCurrentSession().save(sport);
+		return sport;
+	}
+	
+	@Transactional
+	public Team saveTeam(Team team) {
+		sessionFactory.getCurrentSession().save(team);
+		return team;
+	}
+	
+	@Transactional
+	public Team getTeamById(String id) {
+		Team team = (Team) sessionFactory.getCurrentSession().get(
+				Team.class, id);
+		return team;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Team> getTeams() {
+		List<Team> teams = sessionFactory.getCurrentSession()
+				.createQuery("from Team").list();
+		return teams;
+	}
+
+	@Transactional
+	public Sport getSportById(String id) {
+		Sport sport = (Sport) sessionFactory.getCurrentSession().get(
+				Sport.class, id);
+		return sport;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Sport> getSportList() {
+		List<Sport> sports = sessionFactory.getCurrentSession()
+				.createQuery("from Sport").list();
+		return sports;
 	}
 
 	@Transactional
@@ -38,7 +83,8 @@ public class HelloWorldService {
 		match.setTeamAwayId("testaway");
 		match.setTeamHomeId("testhome");
 		sessionFactory.getCurrentSession().save(match);
-		//List results = sessionFactory.getCurrentSession().createQuery("from Match").list();
+		// List results =
+		// sessionFactory.getCurrentSession().createQuery("from Match").list();
 		return match;
 	}
 }

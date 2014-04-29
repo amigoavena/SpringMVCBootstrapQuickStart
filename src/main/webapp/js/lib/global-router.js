@@ -1,6 +1,6 @@
 // Filename: app.js
-define([ 'views', 'views/welcome', 'views/match', 'json2' ], function(VIEWS,
-		Welcome, Match) {
+define([ 'views', 'views/welcome', 'views/match', 'views/match.edit', 'views/league.admin','views/admin', 'json2' ], function(VIEWS,
+		Welcome, Match, MatchEdit, LeagueAdmin, Admin) {
 
 	var c = APP.Commons;
 	var Router = Backbone.Router.extend({
@@ -8,7 +8,9 @@ define([ 'views', 'views/welcome', 'views/match', 'json2' ], function(VIEWS,
 			'' : 'defaultAction',
 			'match/:params' : 'openMatchView',
 			'matchEdit/:params' : 'openMatchEdit',
-			'matches' : 'openMatchesList'
+			'matches' : 'openMatchesList',
+			'leagueAdmin' : 'openLeagueAdmin',
+			'admin' : 'openAdmin'
 		// ':viewId' : 'openView',
 		// ':viewId/:params' : 'openView',
 		},
@@ -29,23 +31,33 @@ define([ 'views', 'views/welcome', 'views/match', 'json2' ], function(VIEWS,
 			var data = c.urlToJSON(params);
 			var matchPageView = new Match({
 				el : $("#container"),
-				// Pass parameter to the view.
 				data : data
 			});
-			matchPageView.initialize();
 		},
-
-		// Shows invoice page.
-		openView : function(viewId, params) {
-			console.log("open " + viewId);
-			var invoicePageView = new Invoice({
+		
+		openMatchEdit : function(params) {
+			var data = c.urlToJSON(params);
+			var matchEditView = new MatchEdit({
 				el : $("#container"),
-				// Pass parameter to the view.
-				id : id
+				data : data
 			});
-			invoicePageView.render();
-			ss
 		},
+		
+		openLeagueAdmin : function(params) {
+			var data = c.urlToJSON(params);
+			var leagueAdminView = new LeagueAdmin({
+				el : $("#container"),
+				data : data
+			});
+		},
+		openAdmin : function(params) {
+			var data = c.urlToJSON(params);
+			var adminView = new Admin({
+				el : $("#container"),
+				data : data
+			});
+		}
+		
 	});
 
 	return Router;
