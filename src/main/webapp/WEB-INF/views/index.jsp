@@ -21,6 +21,7 @@
 				<li class="active"><a href="#">Home</a></li>
 				<li><a href="#">About</a></li>
 				<li><a id="tomala" href="#">Contact</a></li>
+				<li><a id="adminMenu" href="#admin">Admin</a></li>
 			</ul>
 			<h3 class="text-muted">Project name</h3>
 		</div>

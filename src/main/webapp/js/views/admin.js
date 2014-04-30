@@ -20,7 +20,6 @@ define([
 
 		initialize : function(params) {
 			var self = this;
-			// console.log(params.data.id);
 			if (!c.isEmpty(params)) {
 				this.id = params.data.id;
 			}
@@ -39,7 +38,6 @@ define([
 				sportId : null,
 				sportName : $('#sportname', this.el).val()
 			};
-			console.log(data);
 			$.ajax({
 				type : "POST",
 				url : 'saveSport',
@@ -48,6 +46,7 @@ define([
 				success : self.getSports(),
 				dataType : 'json'
 			});
+			$('#sportname', this.el).val('');
 		},
 
 		getSports : function() {
@@ -56,10 +55,8 @@ define([
 				type : "GET",
 				url : 'getSports',
 				success : function(data) {
-					//console.log(data);
 					self.sports = data;
 					self.buildSportTable();
-					//console.log(self.sports);
 				},
 				dataType : 'json'
 			});
@@ -70,13 +67,41 @@ define([
 			$('#sportList').html('');
 			for ( var k in this.sports) {
 				var sport = this.sports[k];
-				console.log(sport);
-				$('#sportList').append(
-						$("<p />", {
-							text: sport.sportName
-						})
-				);
+				var editRef = $('<a />', {
+					href : '#sport/id=' + sport.sportId
+				}).append($('<span/>', {
+					class : 'glyphicon glyphicon-pencil'
+				}));
+				var editRef = $('<a />', {
+					href : '#sport/id=' + sport.sportId
+				}).append($('<span/>', {
+					class : 'glyphicon glyphicon-pencil'
+				}));
+				var trashRef = $('<a />', {
+					class : 'sportDelete',
+					id : sport.sportId,
+					href : '#'
+				}).append($('<span/>', {
+					class : 'glyphicon glyphicon-trash'
+				}));
+				var tr = $('<tr>').append($('<td>').text(sport.sportName),
+						$('<td>').append(editRef), $('<td>').append(trashRef));
+				$('#sportList').append(tr);
 			}
+			
+			$('.sportDelete').click(function(event){
+				console.log(event);
+				var self = this;
+				var sportId = $(this).attr('id');
+				console.log($(this).attr('id'));
+				event.preventDefault();
+				$.ajax({
+					type : "DELETE",
+					url : 'deleteSport?sportId='+sportId,
+					success : self.getSports(),
+					dataType : 'json'
+				});
+			})
 		},
 
 		addLeague : function() {

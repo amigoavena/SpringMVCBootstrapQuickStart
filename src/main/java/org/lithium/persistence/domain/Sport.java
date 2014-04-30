@@ -12,17 +12,17 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="sport")
 public class Sport {
 	
-	private String sportId;
+	private Long sportId;
 	private String sportName;
 	
 	@Id
 	@GeneratedValue(generator="sport-uuid")
-	@GenericGenerator(name="sport-uuid", strategy = "uuid")
+	@GenericGenerator(name="sport-uuid", strategy = "increment")
 	@Column(name="sportId")
-	public String getSportId() {
+	public Long getSportId() {
 		return sportId;
 	}
-	public void setSportId(String sportId) {
+	public void setSportId(Long sportId) {
 		this.sportId = sportId;
 	}
 	@Column(name="sportName")

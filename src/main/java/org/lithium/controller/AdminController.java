@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -33,8 +34,18 @@ public class AdminController {
 	@ResponseBody
 	public Sport saveSport(@RequestBody SportDTO sportdto) {
 		Sport sport = new Sport();
+		if(sportdto.getSportName().isEmpty())
+			return sport;
 		sport.setSportName(sportdto.getSportName());
 		return service.saveSport(sport);
+	}
+	
+	@RequestMapping(value = "/deleteSport", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteSport(@RequestParam Long sportId) {
+		Sport sport = service.getSportById(sportId);
+		service.deleteSport(sport);
+		return;
 	}
 	
 	@RequestMapping(value = "/saveTeam", method = RequestMethod.GET)

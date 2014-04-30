@@ -41,6 +41,11 @@ public class HelloWorldService {
 	}
 	
 	@Transactional
+	public void deleteSport(Sport sport){
+		sessionFactory.getCurrentSession().delete(sport);
+	}
+	
+	@Transactional
 	public Team saveTeam(Team team) {
 		sessionFactory.getCurrentSession().save(team);
 		return team;
@@ -62,7 +67,7 @@ public class HelloWorldService {
 	}
 
 	@Transactional
-	public Sport getSportById(String id) {
+	public Sport getSportById(Long id) {
 		Sport sport = (Sport) sessionFactory.getCurrentSession().get(
 				Sport.class, id);
 		return sport;

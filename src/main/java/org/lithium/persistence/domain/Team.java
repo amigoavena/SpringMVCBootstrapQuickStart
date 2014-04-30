@@ -12,7 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="teams")
 public class Team {
 	
-	private String teamId;
+	private Long teamId;
 	private String teamName;
 	private String leagueId;
 	private String imageLocation;
@@ -20,12 +20,12 @@ public class Team {
 	
 	@Id
 	@GeneratedValue(generator="team-uuid")
-	@GenericGenerator(name="team-uuid", strategy = "uuid")
+	@GenericGenerator(name="team-uuid", strategy = "increment")
 	@Column(name="teamId")
-	public String getTeamId() {
+	public Long getTeamId() {
 		return teamId;
 	}
-	public void setTeamId(String teamId) {
+	public void setTeamId(Long teamId) {
 		this.teamId = teamId;
 	}
 	
