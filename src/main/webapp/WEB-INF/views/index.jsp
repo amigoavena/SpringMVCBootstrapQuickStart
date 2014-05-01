@@ -21,24 +21,33 @@
 <body>
 	<div class="container">
 		<div class="header">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a href="#" class="navbar-brand">Project name</a>
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#menu">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-				</div>
-				<div id="menu" class="collapse navbar-collapse ">
-					<ul class="nav nav-pills navbar-right">
-						<!-- <li class="active"><a href="#">Home</a></li> -->
+			<div class="row">
+				<div id="menu" class="collapse navbar-collapse pull-right">
+					<p>
+					<ul class="nav nav-pills">
+						<li><a href="#">Home</a></li>
 						<li><a href="#">About</a></li>
 						<li><a id="tomala" href="#match/id=1">Contact</a></li>
 						<li><a id="adminMenu" href="#admin">Admin</a></li>
 					</ul>
+					</p>
 				</div>
+				<div class="row">
+					<div class="col-xs-5">
+						<p>
+							<img src="http://placehold.it/120x60">
+						</p>
+					</div>
+					<div class="col-xs-5 pull-right">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target="#menu">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+					</div>
+				</div>
+
 			</div>
 		</div>
 		<div id="content"></div>
@@ -49,6 +58,5 @@
 
 	</div>
 	<!-- /container -->
-
 </body>
 </html>
