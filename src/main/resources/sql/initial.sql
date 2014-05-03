@@ -31,7 +31,7 @@ create table places(
  country varchar(150)
 );
 
-create table sport(
+create table sports(
 	sportId varchar(50),
 	sportName varchar(150)
 );
@@ -44,11 +44,12 @@ create table teams(
  description varchar(250)
 );
 
-create table league(
- leagueId varchar(50),
- leagueName varchar(150),
+create table leagues(
+ leagueId varchar(32),
+ leagueName varchar(250),
  sportId varchar(50),
  address varchar(250),
  address2 varchar(250)
 );
+
 

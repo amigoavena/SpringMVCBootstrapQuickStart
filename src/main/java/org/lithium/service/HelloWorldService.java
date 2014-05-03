@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.lithium.dto.MessageDTO;
+import org.lithium.persistence.domain.League;
 import org.lithium.persistence.domain.Match;
 import org.lithium.persistence.domain.Sport;
 import org.lithium.persistence.domain.Team;
@@ -73,6 +74,32 @@ public class HelloWorldService {
 		return sport;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<League> getLeagueList() {
+		List<League> sports = sessionFactory.getCurrentSession()
+				.createQuery("from League").list();
+		return sports;
+	}
+	
+	@Transactional
+	public League saveTeam(League league) {
+		sessionFactory.getCurrentSession().save(league);
+		return league;
+	}
+	
+	@Transactional
+	public void deleteLeague(League league){
+		sessionFactory.getCurrentSession().delete(league);
+	}
+	
+	@Transactional
+	public League getLeagueById(String id) {
+		League league = (League) sessionFactory.getCurrentSession().get(
+				League.class, id);
+		return league;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<Sport> getSportList() {

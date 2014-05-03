@@ -2,7 +2,9 @@ package org.lithium.controller;
 
 import java.util.List;
 
+import org.lithium.dto.LeagueDTO;
 import org.lithium.dto.SportDTO;
+import org.lithium.persistence.domain.League;
 import org.lithium.persistence.domain.Sport;
 import org.lithium.persistence.domain.Team;
 import org.lithium.service.HelloWorldService;
@@ -40,7 +42,22 @@ public class AdminController {
 		return service.saveSport(sport);
 	}
 	
-	@RequestMapping(value = "/deleteSport", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/deleteLeague", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteLeague(@RequestParam String leagueId) {
+		League league = service.getLeagueById(leagueId);
+		service.deleteLeague(league);
+		return;
+	}
+	
+	/*@RequestMapping(value = "/saveLeague", method = RequestMethod.POST)
+	@ResponseBody
+	public LeagueDTO saveLeague(@RequestBody LeagueDTO leaguedto) {
+		League sport = new League();
+		//return service.saveSport(sport);
+	}*/
+	
+	@RequestMapping(value = "/deleteLeague", method = RequestMethod.DELETE)
 	@ResponseBody
 	public void deleteSport(@RequestParam Long sportId) {
 		Sport sport = service.getSportById(sportId);
