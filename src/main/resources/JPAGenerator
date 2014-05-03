@@ -1,0 +1,23 @@
+#!/usr/bin/python
+
+import json
+
+tableList = []
+json_data = []
+with open("code-generator/generator-config.json") as json_file:
+    json_data = json.load(json_file)
+    tableList = list(json_data.keys())
+    with open('sql/generated.sql', 'w') as sqlOut:
+	    for table in tableList:
+	    	sqlOut.write('-- Table %s \n' % table )
+	    	tableDef = "create table %s (\n" % ( table )
+	    	for field in json_data[table]:
+	    		if field['type'] == 'varchar':
+	    			tableDef = "%s %s %s(%s),\n" % ( tableDef, field['column'], field['type'] ,field['size'] )
+	    		else:
+	    			tableDef = "%s %s %s,\n" % ( tableDef, field['column'], field['type'] )
+				#print field['column']
+		tableDef = "%s\n);\n" % tableDef[:-2]
+		sqlOut.write(tableDef)
+print tableList
+#print json_data

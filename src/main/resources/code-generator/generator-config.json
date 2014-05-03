@@ -1,0 +1,97 @@
+{
+  "leagues": [
+    {
+      "column": "leagueId",
+      "isId": true,
+      "generator": "uuid",
+      "type": "varchar",
+      "size": 32
+    },
+    {
+      "column": "leagueName",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 250
+    },
+    {
+      "column": "sportId",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 50
+    },
+    {
+      "column": "address",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 250
+    },
+    {
+      "column": "address2",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 250
+    }
+  ],
+  "scores": [
+    {
+      "column": "scoreID",
+      "isId": true,
+      "generator": "uuid",
+      "type": "varchar",
+      "size": 32
+    },
+    {
+      "column": "matchID",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 250
+    },
+    {
+      "column": "playerID",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 50
+    },
+    {
+      "column": "teamID",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 250
+    },
+    {
+      "column": "scoreValue",
+      "isId": false,
+      "generator": null,
+      "type": "int",
+      "size": null
+    },
+    {
+      "column": "scoreTime",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 50
+    },
+    {
+      "column": "scoreDate",
+      "isId": false,
+      "generator": null,
+      "type": "timestamp",
+      "size": null
+    },
+    {
+      "column": "updateUser",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 50
+    }
+  ]
+}
