@@ -63,6 +63,7 @@ def createORM(table,isDTO):
 				if not isDTO:
 					if field['isId']:
 						dtoFile.write('\n\t@Id\n')
+					if not field['generator'] is None:
 						dtoFile.write('\t@GeneratedValue(generator="%s-uuid")\n' % tableUpper.lower())
 						dtoFile.write('\t@GenericGenerator(name="%s-uuid", strategy = "%s")\n' % (tableUpper.lower(),field['generator']) )
 					dtoFile.write('\t@Column(name="%s")\n' % field['column'] )

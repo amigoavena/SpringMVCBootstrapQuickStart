@@ -2,7 +2,7 @@
   "matchExtras": [
     {
       "column": "matchId",
-      "isId": false,
+      "isId": true,
       "generator": null,
       "type": "varchar",
       "size": 32

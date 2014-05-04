@@ -48,6 +48,8 @@ public class Team {
 	public void setImageLocation(String imageLocation) {
 		this.imageLocation = imageLocation;
 	}
+	@GeneratedValue(generator="team-uuid")
+	@GenericGenerator(name="team-uuid", strategy = "increment")
 	@Column(name="description")
 	private String description;
 	public String getDescription() {

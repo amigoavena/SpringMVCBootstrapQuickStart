@@ -12,6 +12,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name="matchExtras")
 public class MatchExtra {
+
+	@Id
 	@Column(name="matchId")
 	private String matchId;
 	public String getMatchId() {
