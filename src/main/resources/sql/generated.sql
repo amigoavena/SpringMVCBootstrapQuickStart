@@ -17,3 +17,8 @@ create table scores (
  scoreDate timestamp,
  updateUser varchar(50)
 );
+-- Table sports 
+create table sports (
+ sportId bigint,
+ sportName varchar(250)
+);

@@ -2,22 +2,74 @@
 
 import json
 
-tableList = []
-json_data = []
-with open("code-generator/generator-config.json") as json_file:
-    json_data = json.load(json_file)
-    tableList = list(json_data.keys())
-    with open('sql/generated.sql', 'w') as sqlOut:
-	    for table in tableList:
-	    	sqlOut.write('-- Table %s \n' % table )
-	    	tableDef = "create table %s (\n" % ( table )
-	    	for field in json_data[table]:
-	    		if field['type'] == 'varchar':
-	    			tableDef = "%s %s %s(%s),\n" % ( tableDef, field['column'], field['type'] ,field['size'] )
-	    		else:
-	    			tableDef = "%s %s %s,\n" % ( tableDef, field['column'], field['type'] )
-				#print field['column']
+
+def main():
+	global tableList
+	global json_data
+	json_data = []
+	tableList = []
+	json_file = file('code-generator/generator-config.json','r')
+	json_data = json.load(json_file)
+	tableList = list(json_data.keys())
+	sqlOut = file('sql/generated.sql', 'w')
+	for table in tableList:
+		sqlOut.write('-- Table %s \n' % table )
+		tableDef = "create table %s (\n" % ( table )
+		for field in json_data[table]:
+			if field['type'] == 'varchar':
+				tableDef = "%s %s %s(%s),\n" % ( tableDef, field['column'], field['type'] ,field['size'] )
+			else:
+				tableDef = "%s %s %s,\n" % ( tableDef, field['column'], field['type'] )
+			#print field['column']
 		tableDef = "%s\n);\n" % tableDef[:-2]
 		sqlOut.write(tableDef)
-print tableList
-#print json_data
+	#print tableList
+	#print json_data
+
+	for table in tableList:
+		createORM(table,False)
+		createORM(table,True)
+	
+
+def createORM(table,isDTO):
+	tableUpper = "%s%s"%(table[:1].upper(),table[1:-1])
+	#print tableUpper
+	if isDTO:
+		dtoFile = file('code-generator/dto/%sDTO.java' % tableUpper ,'w+')
+		dtoFile.write('package org.lithium.dto;\n\n')
+	else:
+		dtoFile = file('code-generator/persistence/%s.java' % tableUpper ,'w+')
+		dtoFile.write('package org.lithium.persistence.domain;\n\n')
+	if not isDTO:
+		dtoFile.write('import javax.persistence.Column;\nimport javax.persistence.Entity;\nimport javax.persistence.GeneratedValue;\n')
+		dtoFile.write('import javax.persistence.Id;\nimport javax.persistence.Table;\n\nimport org.hibernate.annotations.GenericGenerator;\n\n@Entity\n')
+		dtoFile.write('@Table(name="%s")\n'%table)
+	if not isDTO:
+		dtoFile.write('public class %s {\n' % tableUpper)
+	else:
+		dtoFile.write('public class %sDTO {\n' % tableUpper)
+	for field in json_data[table]:
+				fieldName = '%s%s' % (field['column'][:1].upper(),field['column'][1:])
+				columnName = field['column']
+				if field['type'] == 'varchar':
+					fieldtype = 'String'
+				elif field['type'] == 'int':
+					fieldtype = 'Integer'
+				elif field['type'] == 'bigint':
+					fieldtype = 'Long'
+				if not isDTO:
+					if field['isId']:
+						dtoFile.write('\n\t@Id\n')
+						dtoFile.write('\t@GeneratedValue(generator="%s-uuid")\n' % tableUpper.lower())
+						dtoFile.write('\t@GenericGenerator(name="%s-uuid", strategy = "%s")\n' % (tableUpper.lower(),field['generator']) )
+					dtoFile.write('\t@Column(name="%s")\n' % field['column'] )
+				dtoFile.write('\tprivate %s %s;\n' % (fieldtype,columnName))
+				dtoFile.write('\tpublic %s get%s() {\n' % (fieldtype,fieldName) )
+				dtoFile.write('\t\treturn this.%s;\n\t}\n'%columnName)
+				dtoFile.write('\tpublic void set%s(%s %s) {\n' % (fieldName, fieldtype, columnName))
+				dtoFile.write('\t\tthis.%s = %s;\n\t}\n'%(field['column'],field['column']))
+	dtoFile.write('}')
+
+
+if __name__ == "__main__":
+	main()

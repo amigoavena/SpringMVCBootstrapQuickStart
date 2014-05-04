@@ -1,4 +1,20 @@
 {
+  "sports": [
+    {
+      "column": "sportId",
+      "isId": true,
+      "generator": "increment",
+      "type": "bigint",
+      "size": null
+    },
+    {
+      "column": "sportName",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 250
+    }
+  ],
   "leagues": [
     {
       "column": "leagueId",
