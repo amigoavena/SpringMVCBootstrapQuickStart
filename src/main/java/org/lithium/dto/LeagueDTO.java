@@ -1,42 +1,40 @@
 package org.lithium.dto;
 
+import java.sql.Timestamp;
 public class LeagueDTO {
-	
 	private String leagueId;
-	private String leagueName;
-	private Long SportId;
-	private String address;
-	private String address2;
-	
 	public String getLeagueId() {
-		return leagueId;
+		return this.leagueId;
 	}
 	public void setLeagueId(String leagueId) {
 		this.leagueId = leagueId;
 	}
+	private String leagueName;
 	public String getLeagueName() {
-		return leagueName;
+		return this.leagueName;
 	}
 	public void setLeagueName(String leagueName) {
 		this.leagueName = leagueName;
 	}
-	public Long getSportId() {
-		return SportId;
+	private String sportId;
+	public String getSportId() {
+		return this.sportId;
 	}
-	public void setSportId(Long sportId) {
-		SportId = sportId;
+	public void setSportId(String sportId) {
+		this.sportId = sportId;
 	}
+	private String address;
 	public String getAddress() {
-		return address;
+		return this.address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	private String address2;
 	public String getAddress2() {
-		return address2;
+		return this.address2;
 	}
 	public void setAddress2(String address2) {
 		this.address2 = address2;
 	}
-
 }

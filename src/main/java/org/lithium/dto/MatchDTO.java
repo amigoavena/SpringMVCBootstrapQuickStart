@@ -1,60 +1,33 @@
 package org.lithium.dto;
 
-import java.util.Date;
-import java.util.List;
-
+import java.sql.Timestamp;
 public class MatchDTO {
-	
 	private String matchId;
-	private String teamHome;
-	private String teamAway;
-	private Date matchDate;
-	private String referee;
-	private boolean finished;
-	
-	private List<EventDTO> events;
-	
-	public String getReferee() {
-		return referee;
-	}
-	public void setReferee(String referee) {
-		this.referee = referee;
-	}
-	public boolean isFinished() {
-		return finished;
-	}
-	public void setFinished(boolean finished) {
-		this.finished = finished;
-	}
-	public List<EventDTO> getEvents() {
-		return events;
-	}
-	public void setEvents(List<EventDTO> events) {
-		this.events = events;
-	}
 	public String getMatchId() {
-		return matchId;
+		return this.matchId;
 	}
 	public void setMatchId(String matchId) {
 		this.matchId = matchId;
 	}
-	public String getTeamHome() {
-		return teamHome;
+	private String teamHomeId;
+	public String getTeamHomeId() {
+		return this.teamHomeId;
 	}
-	public void setTeamHome(String teamHome) {
-		this.teamHome = teamHome;
+	public void setTeamHomeId(String teamHomeId) {
+		this.teamHomeId = teamHomeId;
 	}
-	public String getTeamAway() {
-		return teamAway;
+	private String teamAwayId;
+	public String getTeamAwayId() {
+		return this.teamAwayId;
 	}
-	public void setTeamAway(String teamAway) {
-		this.teamAway = teamAway;
+	public void setTeamAwayId(String teamAwayId) {
+		this.teamAwayId = teamAwayId;
 	}
-	public Date getMatchDate() {
-		return matchDate;
+	private Timestamp matchDate;
+	public Timestamp getMatchDate() {
+		return this.matchDate;
 	}
-	public void setMatchDate(Date matchDate) {
+	public void setMatchDate(Timestamp matchDate) {
 		this.matchDate = matchDate;
 	}
-
 }

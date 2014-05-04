@@ -6,6 +6,26 @@ create table leagues (
  address varchar(250),
  address2 varchar(250)
 );
+-- Table matchs 
+create table matchs (
+ matchId varchar(32),
+ teamHomeId varchar(32),
+ teamAwayId varchar(32),
+ matchDate timestamp
+);
+-- Table places 
+create table places (
+ placeId varchar(32),
+ placeName varchar(250),
+ city varchar(150),
+ state varchar(100),
+ country varchar(100)
+);
+-- Table sports 
+create table sports (
+ sportId bigint,
+ sportName varchar(250)
+);
 -- Table scores 
 create table scores (
  scoreID varchar(32),
@@ -17,8 +37,11 @@ create table scores (
  scoreDate timestamp,
  updateUser varchar(50)
 );
--- Table sports 
-create table sports (
- sportId bigint,
- sportName varchar(250)
+-- Table teams 
+create table teams (
+ teamId varchar(32),
+ teamName varchar(250),
+ leagueId varchar(32),
+ imageLocation varchar(250),
+ description varchar(250)
 );

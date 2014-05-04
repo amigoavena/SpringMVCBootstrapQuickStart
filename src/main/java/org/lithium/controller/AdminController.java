@@ -50,14 +50,19 @@ public class AdminController {
 		return;
 	}
 	
-	/*@RequestMapping(value = "/saveLeague", method = RequestMethod.POST)
+	@RequestMapping(value = "/saveLeague", method = RequestMethod.POST)
 	@ResponseBody
 	public LeagueDTO saveLeague(@RequestBody LeagueDTO leaguedto) {
-		League sport = new League();
-		//return service.saveSport(sport);
-	}*/
+		League league = new League();
+		league.setLeagueName(leaguedto.getLeagueName());
+		league.setSportId(leaguedto.getSportId());
+		league.setAddress(leaguedto.getAddress());
+		league.setAddress2(leaguedto.getAddress2());
+		service.saveLeague(league);
+		return leaguedto;
+	}
 	
-	@RequestMapping(value = "/deleteLeague", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/deleteSport", method = RequestMethod.DELETE)
 	@ResponseBody
 	public void deleteSport(@RequestParam Long sportId) {
 		Sport sport = service.getSportById(sportId);

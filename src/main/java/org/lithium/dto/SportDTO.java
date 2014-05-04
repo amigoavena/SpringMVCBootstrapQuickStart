@@ -1,21 +1,19 @@
 package org.lithium.dto;
 
+import java.sql.Timestamp;
 public class SportDTO {
-	
-	private String sportId;
-	private String sportName;
-	
-	public String getSportId() {
-		return sportId;
+	private Long sportId;
+	public Long getSportId() {
+		return this.sportId;
 	}
-	public void setSportId(String sportId) {
+	public void setSportId(Long sportId) {
 		this.sportId = sportId;
 	}
+	private String sportName;
 	public String getSportName() {
-		return sportName;
+		return this.sportName;
 	}
 	public void setSportName(String sportName) {
 		this.sportName = sportName;
 	}
-
 }

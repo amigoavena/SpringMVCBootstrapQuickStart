@@ -1,5 +1,6 @@
 package org.lithium.service;
 
+import java.sql.Timestamp;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class HelloWorldService {
 	}
 	
 	@Transactional
-	public League saveTeam(League league) {
+	public League saveLeague(League league) {
 		sessionFactory.getCurrentSession().save(league);
 		return league;
 	}
@@ -111,7 +112,7 @@ public class HelloWorldService {
 	@Transactional
 	public Match saveMatch() {
 		Match match = new Match();
-		match.setMatchDate(GregorianCalendar.getInstance().getTime());
+		match.setMatchDate(new Timestamp(GregorianCalendar.getInstance().getTimeInMillis()));
 		match.setTeamAwayId("testaway");
 		match.setTeamHomeId("testhome");
 		sessionFactory.getCurrentSession().save(match);

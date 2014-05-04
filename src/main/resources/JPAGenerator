@@ -11,7 +11,7 @@ def main():
 	json_file = file('code-generator/generator-config.json','r')
 	json_data = json.load(json_file)
 	tableList = list(json_data.keys())
-	sqlOut = file('sql/generated.sql', 'w')
+	sqlOut = file('sql/initial.sql', 'w')
 	for table in tableList:
 		sqlOut.write('-- Table %s \n' % table )
 		tableDef = "create table %s (\n" % ( table )
@@ -35,11 +35,12 @@ def createORM(table,isDTO):
 	tableUpper = "%s%s"%(table[:1].upper(),table[1:-1])
 	#print tableUpper
 	if isDTO:
-		dtoFile = file('code-generator/dto/%sDTO.java' % tableUpper ,'w+')
-		dtoFile.write('package org.lithium.dto;\n\n')
+		dtoFile = file('../java/org/lithium/dto/%sDTO.java' % tableUpper ,'w+')
+		dtoFile.write('package org.lithium.dto;\n')
 	else:
-		dtoFile = file('code-generator/persistence/%s.java' % tableUpper ,'w+')
-		dtoFile.write('package org.lithium.persistence.domain;\n\n')
+		dtoFile = file('../java/org/lithium/persistence/domain/%s.java' % tableUpper ,'w+')
+		dtoFile.write('package org.lithium.persistence.domain;\n')
+	dtoFile.write('\nimport java.sql.Timestamp;\n')
 	if not isDTO:
 		dtoFile.write('import javax.persistence.Column;\nimport javax.persistence.Entity;\nimport javax.persistence.GeneratedValue;\n')
 		dtoFile.write('import javax.persistence.Id;\nimport javax.persistence.Table;\n\nimport org.hibernate.annotations.GenericGenerator;\n\n@Entity\n')
@@ -57,6 +58,8 @@ def createORM(table,isDTO):
 					fieldtype = 'Integer'
 				elif field['type'] == 'bigint':
 					fieldtype = 'Long'
+				elif field['type'] == 'timestamp':
+					fieldtype = 'Timestamp'
 				if not isDTO:
 					if field['isId']:
 						dtoFile.write('\n\t@Id\n')

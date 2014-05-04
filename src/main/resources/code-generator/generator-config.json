@@ -1,4 +1,131 @@
 {
+  "matchExtras": [
+    {
+      "column": "matchId",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 32
+    },
+    {
+      "column": "referee",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 32
+    },
+    {
+      "column": "placeId",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 32
+    }
+  ],
+  "places": [
+    {
+      "column": "placeId",
+      "isId": true,
+      "generator": "uuid",
+      "type": "varchar",
+      "size": 32
+    },
+    {
+      "column": "placeName",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 250
+    },
+    {
+      "column": "city",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 150
+    },
+    {
+      "column": "state",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 100
+    },
+    {
+      "column": "country",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 100
+    }
+  ],
+  "matchs": [
+    {
+      "column": "matchId",
+      "isId": true,
+      "generator": "uuid",
+      "type": "varchar",
+      "size": 32
+    },
+    {
+      "column": "teamHomeId",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 32
+    },
+    {
+      "column": "teamAwayId",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 32
+    },
+    {
+      "column": "matchDate",
+      "isId": false,
+      "generator": null,
+      "type": "timestamp",
+      "size": null
+    }
+  ],
+  "teams": [
+    {
+      "column": "teamId",
+      "isId": true,
+      "generator": "uuid",
+      "type": "varchar",
+      "size": 32
+    },
+    {
+      "column": "teamName",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 250
+    },
+    {
+      "column": "leagueId",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 32
+    },
+    {
+      "column": "imageLocation",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 250
+    },
+    {
+      "column": "description",
+      "isId": false,
+      "generator": "increment",
+      "type": "varchar",
+      "size": 250
+    }
+  ],
   "sports": [
     {
       "column": "sportId",
