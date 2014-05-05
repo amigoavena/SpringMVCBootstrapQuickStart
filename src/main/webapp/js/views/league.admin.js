@@ -1,7 +1,7 @@
 define([
 // Using the Require.js text! plugin, we are loaded raw text
 // which will be used as our views primary template
-'text!templates/league.admin.html', 'stomp', 'sockjs', 'notify', 'growl' ], function(
+'text!templates/league.html', 'stomp', 'sockjs', 'notify', 'growl' ], function(
 		compiledTemplate, Stomp, SockJS) {
 	
 	var c = APP.Commons;
