@@ -44,10 +44,10 @@ public class AdminController {
 	
 	@RequestMapping(value = "/deleteLeague", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void deleteLeague(@RequestParam String leagueId) {
+	public League deleteLeague(@RequestParam String leagueId) {
 		League league = service.getLeagueById(leagueId);
 		service.deleteLeague(league);
-		return;
+		return league;
 	}
 	
 	@RequestMapping(value = "/saveLeague", method = RequestMethod.POST)
@@ -64,10 +64,10 @@ public class AdminController {
 	
 	@RequestMapping(value = "/deleteSport", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void deleteSport(@RequestParam Long sportId) {
+	public Sport deleteSport(@RequestParam Long sportId) {
 		Sport sport = service.getSportById(sportId);
 		service.deleteSport(sport);
-		return;
+		return sport;
 	}
 	
 	@RequestMapping(value = "/saveTeam", method = RequestMethod.GET)

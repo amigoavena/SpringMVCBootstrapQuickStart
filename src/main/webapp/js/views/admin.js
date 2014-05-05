@@ -17,18 +17,32 @@ define([
 			console.log("rendered");
 			this.getSports();
 		},
+		
+		initCustomEvents:function(){
+			console.log("customEvents!");
+		},
 
 		initialize : function(params) {
 			var self = this;
 			if (!c.isEmpty(params)) {
 				this.id = params.data.id;
 			}
+			this.initCustomEvents();
 			this.render();
 			console.log("Admin match initialized");
-
+			amplify.subscribe('admin:sport:changed',this.getSports);
+			amplify.subscribe('admin:sport:refresh', this.buildSportTable );
 			$("#addSport", this.el).click(function() {
 				self.addSport();
 			});
+		},
+		
+		refreshSports: function(data){
+			var self = this;
+			console.log(data);
+			console.log("refreshingSports");
+			//this.sports = data;
+			this.addLeague();
 		},
 
 		addSport : function() {
@@ -43,7 +57,9 @@ define([
 				url : 'saveSport',
 				data : JSON.stringify(data),
 				contentType : "application/json; charset=utf-8",
-				success : self.getSports(),
+				success : function(data){
+					amplify.publish('admin:sport:changed');
+				},
 				dataType : 'json'
 			});
 			$('#sportname', this.el).val('');
@@ -55,16 +71,20 @@ define([
 				type : "GET",
 				url : 'getSports',
 				success : function(data) {
-					self.sports = data;
-					self.buildSportTable();
+					//amplify.publish('sport.refresh', data );
+					amplify.publish('admin:sport:refresh', data );
+					//self.sports = data;
+					//self.buildSportTable();
 				},
 				dataType : 'json'
 			});
 		},
 
-		buildSportTable : function() {
+		buildSportTable : function(data) {
 			console.log("buildSportTable");
-			$('#sportList').html('');
+			var self = this;
+			self.sports = data;
+			$('#sportList',this.el).html('');
 			for ( var k in this.sports) {
 				var sport = this.sports[k];
 				var editRef = $('<a />', {
@@ -91,14 +111,15 @@ define([
 			
 			$('.sportDelete').click(function(event){
 				console.log(event);
-				var self = this;
 				var sportId = $(this).attr('id');
 				console.log($(this).attr('id'));
 				event.preventDefault();
 				$.ajax({
 					type : "DELETE",
 					url : 'deleteSport?sportId='+sportId,
-					success : self.getSports(),
+					success : function(data){
+						amplify.publish('admin:sport:changed');
+					},
 					dataType : 'json'
 				});
 			})
