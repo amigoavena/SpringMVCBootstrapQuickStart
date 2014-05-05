@@ -17,6 +17,7 @@ var REQJS_CONF = {
 		notify : 'lib/notify.min',
 		growl : 'lib/bootstrap-growl.min',
 		stomp : 'lib/stomp',
+		bootstrapValidator : 'lib/bootstrapValidator',
 		bootbox: 'lib/bootbox.min',
 		sockjs : 'lib/sockjs',
 		text : 'lib/text',
@@ -46,6 +47,9 @@ var REQJS_CONF = {
 		},
 		'bootbox' : {
 			deps : ['jquery','bootstrap']
+		},
+		'bootstrapValidator' : {
+			deps : ['jquery', 'bootstrap']
 		},
 		'growl' : {
 			deps: ['jquery','bootstrap']

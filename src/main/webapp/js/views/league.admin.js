@@ -23,7 +23,21 @@ define([
 				this.id = params.data.id;
 			}
 			this.render();
-			console.log("LeagueAdmin match initialized");
+			console.log("League match initialized");
+			
+			$('#addLeague').click(function(event){
+				event.preventDefault();
+				$('#leagueForm').validator('validate')
+				var data = {
+					leagueId : $('#leagueId', this.el).val(),
+					leagueName : $('#leagueName', this.el).val(),
+					sportId : $('#leagueName', this.el).val(),
+					address : $('#address', this.el).val(),
+					address2 : $('#address2', this.el).val()
+				};
+				console.log(JSON.stringify(data));
+				console.log("addLeague");
+			});
 		}
 		
 	});

@@ -1,23 +1,35 @@
 <div class=row>
 	<div class="col-md-12 text-center">
-		<form class="form-horizontal" role="form">
+		<form id="leagueForm" class="form-horizontal" role="form" data-toggle="validator">
 			<h3>League</h3>
 			<div class="form-group">
 				<label for="leagueId" class="col-md-2 control-label">leagueId</label>
 				<div class="col-md-8">
-					<input class="form-control" id="leagueId" placeholder="leagueId">
+					<input class="form-control" id="leagueId" name="leagueId" placeholder="leagueId">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="leagueName" class="col-md-2 control-label">leagueName</label>
 				<div class="col-md-8">
-					<input class="form-control" id="leagueName" placeholder="leagueName">
+					<input class="form-control" id="leagueName" name="leagueName" placeholder="leagueName">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="sportId" class="col-md-2 control-label">sportId</label>
 				<div class="col-md-8">
-					<input class="form-control" id="sportId" placeholder="sportId">
+					<input type="number" class="form-control" id="sportId" name="sportId" placeholder="sportId">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="address" class="col-md-2 control-label">address</label>
+				<div class="col-md-8">
+					<input class="form-control" id="address" name="address" placeholder="address">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="address2" class="col-md-2 control-label">address2</label>
+				<div class="col-md-8">
+					<input class="form-control" id="address2" name="address2" placeholder="address2">
 				</div>
 			</div>
 			<div class="form-group">
@@ -26,20 +38,5 @@
 				</div>
 			</div>
 		</form>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-6">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Sport Name</th>
-					<th></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody id="sportList"></tbody>
-		</table>
 	</div>
 </div>
