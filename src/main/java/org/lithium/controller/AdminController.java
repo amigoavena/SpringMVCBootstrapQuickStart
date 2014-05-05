@@ -64,10 +64,20 @@ public class AdminController {
 	
 	@RequestMapping(value = "/deleteSport", method = RequestMethod.DELETE)
 	@ResponseBody
-	public Sport deleteSport(@RequestParam Long sportId) {
+	public SportDTO deleteSport(@RequestParam Long sportId) {
 		Sport sport = service.getSportById(sportId);
 		service.deleteSport(sport);
-		return sport;
+		SportDTO dto = new SportDTO();
+		return dto;
+	}
+	
+	@RequestMapping(value = "/updateSport", method = RequestMethod.POST)
+	@ResponseBody
+	public SportDTO updateSport(@RequestBody SportDTO dto) {
+		Sport sport = service.getSportById(dto.getSportId());
+		sport.setSportName(dto.getSportName());
+		service.updateSport(sport);
+		return dto;
 	}
 	
 	@RequestMapping(value = "/saveTeam", method = RequestMethod.GET)

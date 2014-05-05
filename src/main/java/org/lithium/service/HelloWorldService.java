@@ -43,6 +43,12 @@ public class HelloWorldService {
 	}
 	
 	@Transactional
+	public Sport updateSport(Sport sport) {
+		sessionFactory.getCurrentSession().update(sport);
+		return sport;
+	}
+	
+	@Transactional
 	public void deleteSport(Sport sport){
 		sessionFactory.getCurrentSession().delete(sport);
 	}

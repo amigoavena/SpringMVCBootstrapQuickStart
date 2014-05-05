@@ -1,8 +1,8 @@
 define([
 // Using the Require.js text! plugin, we are loaded raw text
 // which will be used as our views primary template
-'text!templates/admin.html', 'stomp', 'sockjs', 'notify', 'growl' ], function(
-		compiledTemplate, Stomp, SockJS) {
+'text!templates/admin.html', 'stomp', 'sockjs', 'bootbox', 'notify', 'growl' ], function(
+		compiledTemplate, Stomp, SockJS, bootbox) {
 
 	var c = APP.Commons;
 
@@ -41,7 +41,7 @@ define([
 			var self = this;
 			console.log(data);
 			console.log("refreshingSports");
-			//this.sports = data;
+			// this.sports = data;
 			this.addLeague();
 		},
 
@@ -71,10 +71,10 @@ define([
 				type : "GET",
 				url : 'getSports',
 				success : function(data) {
-					//amplify.publish('sport.refresh', data );
+					// amplify.publish('sport.refresh', data );
 					amplify.publish('admin:sport:refresh', data );
-					//self.sports = data;
-					//self.buildSportTable();
+					// self.sports = data;
+					// self.buildSportTable();
 				},
 				dataType : 'json'
 			});
@@ -93,6 +93,8 @@ define([
 					class : 'glyphicon glyphicon-pencil'
 				}));
 				var editRef = $('<a />', {
+					class : 'sportEdit',
+					id : sport.sportId,
 					href : '#sport/id=' + sport.sportId
 				}).append($('<span/>', {
 					class : 'glyphicon glyphicon-pencil'
@@ -109,18 +111,49 @@ define([
 				$('#sportList').append(tr);
 			}
 			
+			$('.sportEdit').click(function(event){
+				event.preventDefault();
+				var sportId = $(this).attr('id');
+				bootbox.prompt("Please input new sport Name:", function(result) {
+				if (result === null) {
+					console.log("Prompt dismissed");
+				} else {
+					if(!c.isEmpty(result)){
+						var data = {
+							sportId : sportId,
+							sportName : result,
+						};
+						console.log("updating Sport");
+						$.ajax({
+							type : "POST",
+							url : 'updateSport',
+							data : JSON.stringify(data),
+							contentType : "application/json; charset=utf-8",
+							success : function(data){
+								amplify.publish('admin:sport:changed');
+							},
+							dataType : 'json'
+						});
+					}
+				}
+				});
+			});
 			$('.sportDelete').click(function(event){
 				console.log(event);
 				var sportId = $(this).attr('id');
-				console.log($(this).attr('id'));
+				console.log(sportId);
 				event.preventDefault();
-				$.ajax({
-					type : "DELETE",
-					url : 'deleteSport?sportId='+sportId,
-					success : function(data){
-						amplify.publish('admin:sport:changed');
-					},
-					dataType : 'json'
+				bootbox.confirm("Are you sure to delete the sport?", function(result) {
+					if(result){
+						$.ajax({
+							type : "DELETE",
+							url : 'deleteSport?sportId='+sportId,
+							success : function(data){
+								amplify.publish('admin:sport:changed');
+							},
+							dataType : 'json'
+						});
+					}
 				});
 			})
 		},

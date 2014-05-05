@@ -17,6 +17,7 @@ var REQJS_CONF = {
 		notify : 'lib/notify.min',
 		growl : 'lib/bootstrap-growl.min',
 		stomp : 'lib/stomp',
+		bootbox: 'lib/bootbox.min',
 		sockjs : 'lib/sockjs',
 		text : 'lib/text',
 		views : 'views'
@@ -42,6 +43,9 @@ var REQJS_CONF = {
 		'stomp' : {
 			deps : [ 'sockjs' ],
 			exports : 'Stomp'
+		},
+		'bootbox' : {
+			deps : ['jquery','bootstrap']
 		},
 		'growl' : {
 			deps: ['jquery','bootstrap']
