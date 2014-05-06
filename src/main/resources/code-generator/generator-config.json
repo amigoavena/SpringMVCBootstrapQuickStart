@@ -1,26 +1,34 @@
-{ "facebookAccessTokens" : [ {
-      "column": "accessToken",
+{
+  "facebookAccessTokens": [
+    {
+      "column": "userID",
       "isId": true,
+      "generator": null,
+      "type": "varchar",
+      "size": 100
+    },
+    {
+      "column": "accessToken",
+      "isId": false,
       "generator": null,
       "type": "varchar",
       "size": 250
     },
     {
-      "column": "referee",
+      "column": "expiresIn",
       "isId": false,
       "generator": null,
-      "type": "varchar",
-      "size": 32
+      "type": "int",
+      "size": null
     },
     {
-      "column": "placeId",
+      "column": "signedRequest",
       "isId": false,
       "generator": null,
       "type": "varchar",
-      "size": 32
+      "size": 250
     }
-
-	],
+  ],
   "matchExtras": [
     {
       "column": "matchId",

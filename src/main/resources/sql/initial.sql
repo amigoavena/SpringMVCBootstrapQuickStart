@@ -51,3 +51,10 @@ create table teams (
  imageLocation varchar(250),
  description varchar(250)
 );
+-- Table facebookAccessTokens 
+create table facebookAccessTokens (
+ userID varchar(100),
+ accessToken varchar(250),
+ expiresIn int,
+ signedRequest varchar(250)
+);

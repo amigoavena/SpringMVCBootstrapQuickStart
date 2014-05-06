@@ -27,13 +27,13 @@
 				<div id="menu" class="collapse navbar-collapse pull-right">
 					<p>
 					<ul class="nav nav-pills">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">About</a></li>
+						<li><a href="#"><i class="fa fa-home fa-fw"></i>Home</a></li>
+						<li><a href="#"><i class="fa fa-users fa-fw"></i>About</a></li>
 						<li><a id="tomala" href="#match/id=1"><i
-								class="fa fa-cogs fa-fw"></i>Contact</a></li>
-						<li><a id="adminMenu" href="#admin">Admin</a></li>
-						<li><a data-toggle="modal"
-							data-target="#socialLoginModal">Login</a></li>
+								class="fa fa-envelope-o fa-fw"></i>Contact</a></li>
+						<li><a id="adminMenu" href="#admin"><i
+								class="fa fa-cogs fa-fw"></i>Admin</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#socialLoginModal"><i class="fa fa-user fa-fw"></i>Login</a></li>
 					</ul>
 					</p>
 				</div>
@@ -61,8 +61,8 @@
 		</div>
 
 		<!-- Modal -->
-		<div class="modal fade" id="socialLoginModal" tabindex="-1" role="dialog"
-			aria-labelledby="socialLoginModal" aria-hidden="true">
+		<div class="modal fade" id="socialLoginModal" tabindex="-1"
+			role="dialog" aria-labelledby="socialLoginModal" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -72,25 +72,26 @@
 					</div>
 					<div class="modal-body">
 						<div class="row">
-						<div class="col-md-12 text-center">
-						<p>Connect with a social Network.</p>
-						</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4 text-center">
-								<a class="btn btn-block btn-social btn-twitter"> <i
-									class="fa fa-twitter"></i>Twitter
-								</a>
+							<div class="col-md-12 text-center">
+								<p>Connect with a social Network.</p>
 							</div>
+						</div>
+						<div class="row text-center">
 							<div class="col-md-4 text-center">
-								<a href="#" id="facebook-btn" class="btn btn-block btn-social btn-facebook"> <i
+							<!-- 	<a class="btn btn-block btn-social btn-twitter"> <i
+									class="fa fa-twitter"></i>Twitter
+								</a>-->
+							</div>
+							<div class="col-md-4">
+								<a href="#" id="facebook-btn"
+									class="btn btn-block btn-social btn-facebook"> <i
 									class="fa fa-facebook"></i>Facebook
 								</a>
-							</div>
+							</div> 
 							<div class="col-md-4 text-center">
-								<a class="btn btn-block btn-social btn-google-plus"> <i
+								<!-- <a class="btn btn-block btn-social btn-google-plus"> <i
 									class="fa fa-google-plus"></i>Google
-								</a>
+								</a>-->
 							</div>
 						</div>
 					</div>
