@@ -1,4 +1,26 @@
-{
+{ "facebookAccessTokens" : [ {
+      "column": "accessToken",
+      "isId": true,
+      "generator": null,
+      "type": "varchar",
+      "size": 250
+    },
+    {
+      "column": "referee",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 32
+    },
+    {
+      "column": "placeId",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 32
+    }
+
+	],
   "matchExtras": [
     {
       "column": "matchId",

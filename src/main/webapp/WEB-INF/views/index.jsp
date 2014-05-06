@@ -8,6 +8,8 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrapValidator.min.css" rel="stylesheet">
+<link href="css/font/css/font-awesome.min.css" rel="stylesheet">
+<link href="css/bootstrap-social.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Raleway'
 	rel='stylesheet' type='text/css'>
 <link href="css/main.css" rel="stylesheet">
@@ -27,8 +29,11 @@
 					<ul class="nav nav-pills">
 						<li><a href="#">Home</a></li>
 						<li><a href="#">About</a></li>
-						<li><a id="tomala" href="#match/id=1">Contact</a></li>
+						<li><a id="tomala" href="#match/id=1"><i
+								class="fa fa-cogs fa-fw"></i>Contact</a></li>
 						<li><a id="adminMenu" href="#admin">Admin</a></li>
+						<li><a data-toggle="modal"
+							data-target="#socialLoginModal">Login</a></li>
 					</ul>
 					</p>
 				</div>
@@ -47,13 +52,53 @@
 						</button>
 					</div>
 				</div>
-
 			</div>
 		</div>
 		<div id="content"></div>
 
 		<div class="footer">
 			<p>&copy; Company 2014</p>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="socialLoginModal" tabindex="-1" role="dialog"
+			aria-labelledby="socialLoginModal" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Join Gue.mx today!</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+						<div class="col-md-12 text-center">
+						<p>Connect with a social Network.</p>
+						</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 text-center">
+								<a class="btn btn-block btn-social btn-twitter"> <i
+									class="fa fa-twitter"></i>Twitter
+								</a>
+							</div>
+							<div class="col-md-4 text-center">
+								<a href="#" id="facebook-btn" class="btn btn-block btn-social btn-facebook"> <i
+									class="fa fa-facebook"></i>Facebook
+								</a>
+							</div>
+							<div class="col-md-4 text-center">
+								<a class="btn btn-block btn-social btn-google-plus"> <i
+									class="fa fa-google-plus"></i>Google
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div>

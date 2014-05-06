@@ -1,6 +1,7 @@
 // Filename: app.js
-define([ 'views', 'views/welcome', 'views/match', 'views/match.edit', 'views/league.admin','views/admin', 'json2' ], function(VIEWS,
-		Welcome, Match, MatchEdit, LeagueAdmin, Admin) {
+define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
+		'views/league.admin', 'views/admin', 'json2', 'facebook' ], function(
+		VIEWS, Welcome, Match, MatchEdit, LeagueAdmin, Admin) {
 
 	var c = APP.Commons;
 	var Router = Backbone.Router.extend({
@@ -25,6 +26,20 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit', 'views/lea
 
 		initialize : function() {
 			console.log("router init");
+			amplify.subscribe('fb:login:click', this.facebookClick)
+		},
+
+		facebookClick : function() {
+			FB.login(function(response) {
+				console.log("logIn!");
+				console.log(response);
+				FB.api('/me', function(response) {
+					console.log(JSON.stringify(response));
+				});
+			}, {
+				scope : 'public_profile,email'
+			});
+			console.log("facebook action!");
 		},
 
 		openMatchView : function(params) {
@@ -34,7 +49,7 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit', 'views/lea
 				data : data
 			});
 		},
-		
+
 		openMatchEdit : function(params) {
 			var data = c.urlToJSON(params);
 			var matchEditView = new MatchEdit({
@@ -42,7 +57,7 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit', 'views/lea
 				data : data
 			});
 		},
-		
+
 		openLeagueAdmin : function(params) {
 			var data = c.urlToJSON(params);
 			var leagueAdminView = new LeagueAdmin({
@@ -57,7 +72,7 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit', 'views/lea
 				data : data
 			});
 		}
-		
+
 	});
 
 	return Router;

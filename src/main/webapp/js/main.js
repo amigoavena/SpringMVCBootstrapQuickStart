@@ -17,8 +17,9 @@ var REQJS_CONF = {
 		notify : 'lib/notify.min',
 		growl : 'lib/bootstrap-growl.min',
 		stomp : 'lib/stomp',
+		facebook : '//connect.facebook.net/en_US/all',
 		bootstrapValidator : 'lib/bootstrapValidator',
-		bootbox: 'lib/bootbox.min',
+		bootbox : 'lib/bootbox.min',
 		sockjs : 'lib/sockjs',
 		text : 'lib/text',
 		views : 'views'
@@ -46,29 +47,49 @@ var REQJS_CONF = {
 			exports : 'Stomp'
 		},
 		'bootbox' : {
-			deps : ['jquery','bootstrap']
+			deps : [ 'jquery', 'bootstrap' ]
 		},
 		'bootstrapValidator' : {
-			deps : ['jquery', 'bootstrap']
+			deps : [ 'jquery', 'bootstrap' ]
 		},
 		'growl' : {
-			deps: ['jquery','bootstrap']
+			deps : [ 'jquery', 'bootstrap' ]
+		},
+		'facebook' : {
+			exports : 'FB'
 		}
 	}
 }
 
-//_.extend(REQJS_CONF.paths,APP_LIBS.paths)
-//_.extend(REQJS_CONF.shim,APP_LIBS.shim)
+// _.extend(REQJS_CONF.paths,APP_LIBS.paths)
+// _.extend(REQJS_CONF.shim,APP_LIBS.shim)
 
 require.config(REQJS_CONF);
 
-requirejs([ 'commons', 'router' ], function(Commons, Router) {
+requirejs([ 'commons', 'router', 'facebook' ], function(Commons, Router) {
 
 	_.extend(APP.Commons, new Commons());
-	
+
 	APP.Router = new Object();
 	_.extend(APP.Router, new Router());
+
+	FB.init({
+		appId : '782219015121928',
+	});
 	
+	FB.getLoginStatus(function(response) {
+		console.log(response);
+	});
+	
+	//FB.login()
+	$('#facebook-btn').click(function(event){
+		event.preventDefault();
+		$('#socialLoginModal').modal('hide');
+		amplify.publish('fb:login:click');
+	});
+	
+	amplify.subs
+
 	Backbone.history.start();
-	
+
 });
