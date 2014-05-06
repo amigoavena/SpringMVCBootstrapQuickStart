@@ -33,7 +33,8 @@
 								class="fa fa-envelope-o fa-fw"></i>Contact</a></li>
 						<li><a id="adminMenu" href="#admin"><i
 								class="fa fa-cogs fa-fw"></i>Admin</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#socialLoginModal"><i class="fa fa-user fa-fw"></i>Login</a></li>
+						<li class="user-info dropdown"><a href="#" data-toggle="modal"
+							data-target="#socialLoginModal"><i class="fa fa-user fa-fw"></i>Login</a></li>
 					</ul>
 					</p>
 				</div>
@@ -78,7 +79,7 @@
 						</div>
 						<div class="row text-center">
 							<div class="col-md-4 text-center">
-							<!-- 	<a class="btn btn-block btn-social btn-twitter"> <i
+								<!-- 	<a class="btn btn-block btn-social btn-twitter"> <i
 									class="fa fa-twitter"></i>Twitter
 								</a>-->
 							</div>
@@ -87,7 +88,7 @@
 									class="btn btn-block btn-social btn-facebook"> <i
 									class="fa fa-facebook"></i>Facebook
 								</a>
-							</div> 
+							</div>
 							<div class="col-md-4 text-center">
 								<!-- <a class="btn btn-block btn-social btn-google-plus"> <i
 									class="fa fa-google-plus"></i>Google

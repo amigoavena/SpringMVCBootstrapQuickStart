@@ -78,7 +78,9 @@ requirejs([ 'commons', 'router', 'facebook' ], function(Commons, Router) {
 	});
 	
 	FB.getLoginStatus(function(response) {
-		console.log(response);
+		if(response.status === 'connected'){
+			amplify.publish('fb:login:callback',response);
+		}
 	});
 	
 	//FB.login()
@@ -87,8 +89,6 @@ requirejs([ 'commons', 'router', 'facebook' ], function(Commons, Router) {
 		$('#socialLoginModal').modal('hide');
 		amplify.publish('fb:login:click');
 	});
-	
-	amplify.subs
 
 	Backbone.history.start();
 

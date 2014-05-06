@@ -28,7 +28,8 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 			console.log("router init");
 			amplify.subscribe('fb:login:click', this.facebookClick);
 			amplify.subscribe('fb:login:callback', this.facebookLoginFinalized);
-			amplify.subscribe('fb:login:success',this.facebookLogUser)
+			amplify.subscribe('fb:login:success',this.facebookLogUser);
+			amplify.subscribe('user:loaded',this.userLoaded);
 		},
 
 		facebookClick : function() {
@@ -44,16 +45,22 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 		
 		facebookLoginFinalized: function(fbResponse) {
 			//amplify.publish('fb:login:click');
-			console.log("facebookLoginFinalized");
 			FB.api('/me', function(response) {
 				amplify.publish('fb:login:success',response);
-				
 			});
 		},
 		
 		facebookLogUser: function(fbResponse){
-			console.log("facebookLogUser");
-			console.log(JSON.stringify(fbResponse));
+			APP.User = fbResponse;
+			amplify.publish("user:loaded");
+			$('.user-info').html('')
+			var userMenu = $('<a />').append($('<span/>', {
+				class : 'fa fa-user fa-fw'
+			})).append(APP.User.name).append($('<ul/>',{
+				class: 'dropdown-menu'
+			}));
+			
+			$('.user-info').append(userMenu);
 		},
 
 		openMatchView : function(params) {
@@ -85,6 +92,10 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 				el : $("#container"),
 				data : data
 			});
+		},
+		
+		userLoaded : function() {
+			console.log(APP.User);
 		}
 
 	});
