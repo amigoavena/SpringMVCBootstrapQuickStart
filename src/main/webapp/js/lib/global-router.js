@@ -30,6 +30,7 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 			amplify.subscribe('fb:login:callback', this.facebookLoginFinalized);
 			amplify.subscribe('fb:login:success',this.facebookLogUser);
 			amplify.subscribe('user:loaded',this.userLoaded);
+			amplify.subscribe('user:logout:click',this.userLogout);
 		},
 
 		facebookClick : function() {
@@ -53,14 +54,6 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 		facebookLogUser: function(fbResponse){
 			APP.User = fbResponse;
 			amplify.publish("user:loaded");
-			$('.user-info').html('')
-			var userMenu = $('<a />').append($('<span/>', {
-				class : 'fa fa-user fa-fw'
-			})).append(APP.User.name).append($('<ul/>',{
-				class: 'dropdown-menu'
-			}));
-			
-			$('.user-info').append(userMenu);
 		},
 
 		openMatchView : function(params) {
@@ -96,6 +89,56 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 		
 		userLoaded : function() {
 			console.log(APP.User);
+			$('.user-info').html('');
+			$('.user-info').toggleClass('dropdown');
+			var userMenu = $('<ul/>', {
+				id : 'user-menu',
+				class: 'dropdown-menu'
+			});
+			userMenu
+				.append($('<li/>')
+					.append($('<a/>',{
+						href:'#',
+						id : 'user-logout',
+						text: 'Logout'
+			})));
+			var userInfo = $('<a />', {
+				class: 'dropdown-toggle',
+				'data-toggle' : 'dropdown',
+				href : '#',
+			});
+			userInfo.append($('<i/>', {
+				class : 'fa fa-user fa-fw'
+			}));
+			userInfo.append(APP.User.name);
+			userInfo.append($('<b/>',{
+				class:'caret'
+			}));
+			
+			$('.user-info').append(userInfo);
+			$('.user-info').append(userMenu);
+			//$('#user-menu').dropdown('hide');
+			$('#user-logout').click(function(event){
+				event.preventDefault();
+				amplify.publish('user:logout:click');
+			});
+		},
+		
+
+		userLogout : function() {
+			console.log('logout');
+			$('.user-info').html('');
+			var logIn = $('<a/>', {
+				href : '#',
+				'data-target' : '#socialLoginModal',
+				'data-toggle' : 'modal'
+			});
+			logIn.append($('<i/>', {
+				class : 'fa fa-user fa-fw'
+			}));
+			logIn.append('Login');
+			$('.user-info').append(logIn);
+			APP.User = [];
 		}
 
 	});

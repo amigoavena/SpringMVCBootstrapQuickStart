@@ -89,6 +89,7 @@ requirejs([ 'commons', 'router', 'facebook' ], function(Commons, Router) {
 		$('#socialLoginModal').modal('hide');
 		amplify.publish('fb:login:click');
 	});
+	
 
 	Backbone.history.start();
 

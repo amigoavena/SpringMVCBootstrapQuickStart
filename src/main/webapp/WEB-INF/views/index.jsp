@@ -33,7 +33,7 @@
 								class="fa fa-envelope-o fa-fw"></i>Contact</a></li>
 						<li><a id="adminMenu" href="#admin"><i
 								class="fa fa-cogs fa-fw"></i>Admin</a></li>
-						<li class="user-info dropdown"><a href="#" data-toggle="modal"
+						<li class="user-info"><a href="#" data-toggle="modal"
 							data-target="#socialLoginModal"><i class="fa fa-user fa-fw"></i>Login</a></li>
 					</ul>
 					</p>
