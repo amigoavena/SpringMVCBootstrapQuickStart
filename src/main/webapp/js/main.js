@@ -77,11 +77,11 @@ requirejs([ 'commons', 'router', 'facebook' ], function(Commons, Router) {
 		appId : '782219015121928',
 	});
 	
-	FB.getLoginStatus(function(response) {
+	/*FB.getLoginStatus(function(response) {
 		if(response.status === 'connected'){
 			amplify.publish('fb:login:callback',response);
 		}
-	});
+	});*/
 	
 	//FB.login()
 	$('#facebook-btn').click(function(event){
