@@ -2,8 +2,14 @@ package org.lithium.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+import org.dozer.Mapper;
+import org.lithium.dto.FacebookAccessTokenDTO;
 import org.lithium.dto.LeagueDTO;
 import org.lithium.dto.SportDTO;
+import org.lithium.persistence.domain.FacebookAccessToken;
 import org.lithium.persistence.domain.League;
 import org.lithium.persistence.domain.Sport;
 import org.lithium.persistence.domain.Team;
@@ -16,12 +22,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
+
+
 
 @Controller
 public class AdminController {
 	
 	@Autowired
 	private MessageSendingOperations<String> messagingTemplate;
+	
+	private static Logger LOG = Logger.getLogger(AdminController.class);
+	
+	@Autowired
+	private Mapper serviceMapper;
 
 	@Autowired
 	private HelloWorldService service;
@@ -36,9 +50,9 @@ public class AdminController {
 	@ResponseBody
 	public Sport saveSport(@RequestBody SportDTO sportdto) {
 		Sport sport = new Sport();
+		serviceMapper.map(sportdto, sport);
 		if(sportdto.getSportName().isEmpty())
 			return sport;
-		sport.setSportName(sportdto.getSportName());
 		return service.saveSport(sport);
 	}
 	
@@ -54,10 +68,7 @@ public class AdminController {
 	@ResponseBody
 	public LeagueDTO saveLeague(@RequestBody LeagueDTO leaguedto) {
 		League league = new League();
-		league.setLeagueName(leaguedto.getLeagueName());
-		league.setSportId(leaguedto.getSportId());
-		league.setAddress(leaguedto.getAddress());
-		league.setAddress2(leaguedto.getAddress2());
+		serviceMapper.map(leaguedto, league);
 		service.saveLeague(league);
 		return leaguedto;
 	}
@@ -68,19 +79,20 @@ public class AdminController {
 		Sport sport = service.getSportById(sportId);
 		service.deleteSport(sport);
 		SportDTO dto = new SportDTO();
+		serviceMapper.map(sport, dto);
 		return dto;
 	}
 	
 	@RequestMapping(value = "/updateSport", method = RequestMethod.POST)
 	@ResponseBody
 	public SportDTO updateSport(@RequestBody SportDTO dto) {
-		Sport sport = service.getSportById(dto.getSportId());
-		sport.setSportName(dto.getSportName());
+		Sport sport = new Sport();//service.getSportById(dto.getSportId());
+		serviceMapper.map(dto, sport);
 		service.updateSport(sport);
 		return dto;
 	}
 	
-	@RequestMapping(value = "/saveTeam", method = RequestMethod.GET)
+	@RequestMapping(value = "/saveTeam", method = RequestMethod.POST)
 	@ResponseBody
 	public Team saveTeam(@RequestBody Team team) {
 		return service.saveTeam(team);

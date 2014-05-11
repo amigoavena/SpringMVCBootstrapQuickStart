@@ -46,6 +46,18 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 		
 		facebookLoginFinalized: function(fbResponse) {
 			//amplify.publish('fb:login:click');
+			$.ajax({
+				type : "POST",
+				url : 'saveFBAccessToken',
+				data : JSON.stringify(fbResponse.authResponse),
+				contentType : "application/json; charset=utf-8",
+				success : function(data){
+					console.log(data);
+					//amplify.publish('admin:sport:changed');
+				},
+				dataType : 'json'
+			});
+			
 			FB.api('/me', function(response) {
 				amplify.publish('fb:login:success',response);
 			});

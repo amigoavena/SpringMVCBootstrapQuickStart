@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.lithium.dto.MessageDTO;
+import org.lithium.persistence.domain.FacebookAccessToken;
 import org.lithium.persistence.domain.League;
 import org.lithium.persistence.domain.Match;
 import org.lithium.persistence.domain.Sport;
@@ -40,6 +41,18 @@ public class HelloWorldService {
 	public Sport saveSport(Sport sport) {
 		sessionFactory.getCurrentSession().save(sport);
 		return sport;
+	}
+	
+	@Transactional
+	public FacebookAccessToken saveFBAccessToken(FacebookAccessToken token) {
+		sessionFactory.getCurrentSession().save(token);
+		return token;
+	}
+	
+	@Transactional
+	public FacebookAccessToken updateFBAccessToken(FacebookAccessToken token) {
+		sessionFactory.getCurrentSession().update(token);
+		return token;
 	}
 	
 	@Transactional

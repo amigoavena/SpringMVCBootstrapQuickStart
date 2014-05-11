@@ -1,8 +1,51 @@
 package org.lithium.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+import org.dozer.Mapper;
+import org.lithium.dto.FacebookAccessTokenDTO;
+import org.lithium.persistence.domain.FacebookAccessToken;
+import org.lithium.service.HelloWorldService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class FacebookController {
 
+	private static Logger LOG = Logger.getLogger(FacebookController.class);
+	
+	@Autowired
+	private Mapper serviceMapper;
+
+	@Autowired
+	private HelloWorldService service;
+	
+	@RequestMapping(value = "/saveFBAccessToken", method = RequestMethod.POST)
+	@ResponseBody
+	public FacebookAccessTokenDTO saveFacebookDetails(HttpSession session, @RequestBody FacebookAccessTokenDTO dto) {
+		FacebookAccessToken token = new FacebookAccessToken();
+		serviceMapper.map(dto, token);
+		LOG.warn(token.getSignedRequest().length());
+		//token = service.saveFBAccessToken(token);
+		session.setAttribute("fbResponse", token);
+		serviceMapper.map(token,dto);
+		return dto;
+	}
+	
+	
+	@RequestMapping(value = "/getFBAccessToken", method = RequestMethod.GET)
+	@ResponseBody
+	public FacebookAccessTokenDTO getFacebookDetails(HttpSession session) {
+		FacebookAccessTokenDTO dto = new FacebookAccessTokenDTO();
+		FacebookAccessToken token = (FacebookAccessToken) session.getAttribute("fbResponse");
+		LOG.warn(token);
+		serviceMapper.map(token,dto);
+		return dto;
+	}
+	
 }

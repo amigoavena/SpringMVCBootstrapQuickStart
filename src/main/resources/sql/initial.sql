@@ -56,5 +56,5 @@ create table facebookAccessTokens (
  userID varchar(100),
  accessToken varchar(250),
  expiresIn int,
- signedRequest varchar(250)
+ signedRequest varchar(1024)
 );

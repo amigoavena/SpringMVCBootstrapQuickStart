@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import re
 import json
 
 
@@ -27,8 +28,9 @@ def main():
 	#print json_data
 
 	for table in tableList:
-		createORM(table,False)
-		createORM(table,True)
+		#createORM(table,False)
+		#createORM(table,True)
+		addDozerMapping(table)
 	
 
 def createORM(table,isDTO):
@@ -74,6 +76,15 @@ def createORM(table,isDTO):
 				dtoFile.write('\t\tthis.%s = %s;\n\t}\n'%(field['column'],field['column']))
 	dtoFile.write('}')
 
+def addDozerMapping(table):
+	tableUpper = "%s%s"%(table[:1].upper(),table[1:-1])
+	mappingFile = file('mapping/dozer-conf.xml','r')
+	content = mappingFile.read()
+	mappingFile.close()
+	print re.match(r'(AUTOGEN)', content)
+	#content.replace('test', 'test\n %s' % (tableUpper))
+	print content
+	#print content
 
 if __name__ == "__main__":
 	main()

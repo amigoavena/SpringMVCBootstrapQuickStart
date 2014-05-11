@@ -1,6 +1,5 @@
 package org.lithium.dto;
 
-import java.sql.Timestamp;
 public class FacebookAccessTokenDTO {
 	private String userID;
 	public String getUserID() {

@@ -56,6 +56,9 @@ dependencies {
 	//Logging
 	compile 'log4j:log4j:1.2.14'
 	
+	//Dozer Mapping
+	compile 'net.sf.dozer:dozer:5.4.0'
+	
 	runtime "org.slf4j:slf4j-log4j12:1.7.2"
 
 	providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
