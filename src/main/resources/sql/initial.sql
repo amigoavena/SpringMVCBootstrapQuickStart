@@ -26,12 +26,6 @@ create table sports (
  sportId bigint,
  sportName varchar(250)
 );
--- Table matchExtras 
-create table matchExtras (
- matchId varchar(32),
- referee varchar(32),
- placeId varchar(32)
-);
 -- Table scores 
 create table scores (
  scoreID varchar(32),
@@ -42,6 +36,20 @@ create table scores (
  scoreTime varchar(50),
  scoreDate timestamp,
  updateUser varchar(50)
+);
+-- Table FacebookUsers 
+create table FacebookUsers (
+ id varchar(32),
+ email varchar(32),
+ first_name varchar(64),
+ gender varchar(24),
+ last_name varchar(64),
+ link varchar(255),
+ locale varchar(24),
+ name varchar(255),
+ timeZone varchar(12),
+ updatedTime varchar(32),
+ verified boolean
 );
 -- Table teams 
 create table teams (
@@ -56,5 +64,5 @@ create table facebookAccessTokens (
  userID varchar(100),
  accessToken varchar(250),
  expiresIn int,
- signedRequest varchar(1024)
+ signedRequest varchar(250)
 );

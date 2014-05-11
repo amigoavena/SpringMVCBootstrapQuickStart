@@ -5,7 +5,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.dozer.Mapper;
 import org.lithium.dto.FacebookAccessTokenDTO;
+import org.lithium.dto.FacebookUserDTO;
 import org.lithium.persistence.domain.FacebookAccessToken;
+import org.lithium.persistence.domain.FacebookUser;
 import org.lithium.service.HelloWorldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,5 +49,16 @@ public class FacebookController {
 		serviceMapper.map(token,dto);
 		return dto;
 	}
-	
+
+	@RequestMapping(value = "/saveFacebookUser", method = RequestMethod.POST)
+	@ResponseBody
+	public FacebookUserDTO saveFacebookDetails(FacebookUserDTO dto) {
+		FacebookUser user = new FacebookUser();
+		LOG.debug(user);
+		LOG.debug(dto);
+		serviceMapper.map(dto, user);
+		LOG.debug(user.getId());
+		service.saveFacebookUser(user);
+		return dto;
+	}
 }

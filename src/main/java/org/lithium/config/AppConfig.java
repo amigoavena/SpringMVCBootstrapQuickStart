@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(basePackages = { "org.lithium.service" })
 public class AppConfig {
 	
-	
 	@Bean
 	public DozerBeanMapper dozerBeanMapper(){
 		DozerBeanMapper mapper = new DozerBeanMapper();

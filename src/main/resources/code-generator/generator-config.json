@@ -29,27 +29,83 @@
       "size": 250
     }
   ],
-  "matchExtras": [
+  "FacebookUsers": [
     {
-      "column": "matchId",
+      "column": "id",
       "isId": true,
       "generator": null,
       "type": "varchar",
       "size": 32
     },
     {
-      "column": "referee",
+      "column": "email",
       "isId": false,
       "generator": null,
       "type": "varchar",
       "size": 32
     },
     {
-      "column": "placeId",
+      "column": "first_name",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 64
+    },
+    {
+      "column": "gender",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 24
+    },
+    {
+      "column": "last_name",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 64
+    },
+    {
+      "column": "link",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 255
+    },
+    {
+      "column": "locale",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 24
+    },
+    {
+      "column": "name",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 255
+    },
+    {
+      "column": "timeZone",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 12
+    },
+    {
+      "column": "updatedTime",
       "isId": false,
       "generator": null,
       "type": "varchar",
       "size": 32
+    },
+    {
+      "column": "verified",
+      "isId": false,
+      "generator": null,
+      "type": "boolean",
+      "size": 12
     }
   ],
   "places": [

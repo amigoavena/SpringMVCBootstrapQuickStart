@@ -28,9 +28,9 @@ def main():
 	#print json_data
 
 	for table in tableList:
-		#createORM(table,False)
-		#createORM(table,True)
-		addDozerMapping(table)
+		createORM(table,False)
+		createORM(table,True)
+		#addDozerMapping(table)
 	
 
 def createORM(table,isDTO):
@@ -62,6 +62,8 @@ def createORM(table,isDTO):
 					fieldtype = 'Long'
 				elif field['type'] == 'timestamp':
 					fieldtype = 'Timestamp'
+				elif field['type'] == 'boolean':
+					fieldtype = 'Boolean'
 				if not isDTO:
 					if field['isId']:
 						dtoFile.write('\n\t@Id\n')

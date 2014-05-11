@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.lithium.dto.MessageDTO;
 import org.lithium.persistence.domain.FacebookAccessToken;
+import org.lithium.persistence.domain.FacebookUser;
 import org.lithium.persistence.domain.League;
 import org.lithium.persistence.domain.Match;
 import org.lithium.persistence.domain.Sport;
@@ -138,5 +139,11 @@ public class HelloWorldService {
 		// List results =
 		// sessionFactory.getCurrentSession().createQuery("from Match").list();
 		return match;
+	}
+	
+	@Transactional
+	public FacebookUser saveFacebookUser(FacebookUser user){
+		sessionFactory.getCurrentSession().save(user);
+		return user;
 	}
 }

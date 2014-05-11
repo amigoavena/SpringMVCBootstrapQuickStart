@@ -10,24 +10,24 @@
 		</layout>
 	</appender>
 	
-	<logger name="org.springframework.samples">
-		<level value="debug" />
+	<logger name="org.springframework">
+		<level value="warn" />
 	</logger>
 
 	<logger name="org.springframework.messaging">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
 
 	<logger name="org.springframework.messaging.simp.stomp">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
 
 	<logger name="org.springframework.web">
-		<level value="debug" />
+		<level value="warm" />
 	</logger>
 
 	<logger name="org.springframework.web.socket">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
 
 	<logger name="org.springframework.security">

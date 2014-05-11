@@ -62,4 +62,53 @@
 		</field>
 	</mapping>
 
+	<mapping>
+		<class-a>org.lithium.persistence.domain.FacebookUser</class-a>
+		<class-b>org.lithium.dto.FacebookUserDTO</class-b>
+		<field>
+			<a>email</a>
+			<b>email</b>
+		</field>
+		<field>
+			<a>first_name</a>
+			<b>first_name</b>
+		</field>
+		<field>
+			<a>gender</a>
+			<b>gender</b>
+		</field>
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+		<field>
+			<a>last_name</a>
+			<b>last_name</b>
+		</field>
+		<field>
+			<a>link</a>
+			<b>link</b>
+		</field>
+		<field>
+			<a>locale</a>
+			<b>locale</b>
+		</field>
+		<field>
+			<a>name</a>
+			<b>name</b>
+		</field>
+		<field>
+			<a>timeZone</a>
+			<b>timeZone</b>
+		</field>
+		<field>
+			<a>updatedTime</a>
+			<b>updatedTime</b>
+		</field>
+		<field>
+			<a>verified</a>
+			<b>verified</b>
+		</field>
+	</mapping>
+
 </mappings> 

@@ -37,7 +37,7 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 			FB.login(function(response) {
 				console.log("logIn!");
 				amplify.publish('fb:login:callback',response);
-				console.log(response);
+				//console.log(response);
 			}, {
 				scope : 'public_profile,email'
 			});
@@ -52,7 +52,7 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 				data : JSON.stringify(fbResponse.authResponse),
 				contentType : "application/json; charset=utf-8",
 				success : function(data){
-					console.log(data);
+					//console.log(data);
 					//amplify.publish('admin:sport:changed');
 				},
 				dataType : 'json'
@@ -65,7 +65,19 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 		
 		facebookLogUser: function(fbResponse){
 			APP.User = fbResponse;
-			amplify.publish("user:loaded");
+			console.log(fbResponse);
+			$.ajax({
+				type : "POST",
+				url : 'saveFacebookUser',
+				data : JSON.stringify(fbResponse),
+				contentType : "application/json; charset=utf-8",
+				success : function(data){
+					//console.log(data);
+					//amplify.publish('admin:sport:changed');
+					amplify.publish("user:loaded");
+				},
+				dataType : 'json'
+			});
 		},
 
 		openMatchView : function(params) {
