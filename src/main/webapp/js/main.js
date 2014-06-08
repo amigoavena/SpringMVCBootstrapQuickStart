@@ -74,7 +74,8 @@ requirejs([ 'commons', 'router', 'facebook' ], function(Commons, Router) {
 	_.extend(APP.Router, new Router());
 
 	FB.init({
-		appId : '782219015121928',
+		//appId : '782219015121928',
+		appId: '782178938459269'
 	});
 	
 	/*FB.getLoginStatus(function(response) {
@@ -85,7 +86,7 @@ requirejs([ 'commons', 'router', 'facebook' ], function(Commons, Router) {
 	
 	//FB.login()
 
-	
+
 
 	$('#facebook-btn').click(function(event){
 		event.preventDefault();
