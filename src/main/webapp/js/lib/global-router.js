@@ -31,13 +31,33 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 			amplify.subscribe('fb:login:success',this.facebookLogUser);
 			amplify.subscribe('user:loaded',this.userLoaded);
 			amplify.subscribe('user:logout:click',this.userLogout);
+			this.extraInitialize();
+		},
+
+		extraInitialize: function() {
+
+			$.ajax({
+				type : "GET",
+				url : 'getUser',
+				contentType : "application/json; charset=utf-8",
+				success : function(data){
+					//console.log(data);
+					if(!c.isEmpty(data)){
+						APP.User = data;
+						amplify.publish("user:loaded");
+					}
+					//console.log(data);
+					//amplify.publish('admin:sport:changed');
+				},
+				dataType : 'json'
+			});
+
 		},
 
 		facebookClick : function() {
 			FB.login(function(response) {
 				console.log("logIn!");
 				amplify.publish('fb:login:callback',response);
-				//console.log(response);
 			}, {
 				scope : 'public_profile,email'
 			});
@@ -113,7 +133,7 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 		},
 		
 		userLoaded : function() {
-			console.log(APP.User);
+			//console.log(APP.User);
 			$('.user-info').html('');
 			$('.user-info').toggleClass('dropdown');
 			var userMenu = $('<ul/>', {
@@ -163,7 +183,15 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 			}));
 			logIn.append('Login');
 			$('.user-info').append(logIn);
-			APP.User = [];
+			$.ajax({
+				type : "GET",
+				url : 'logOutUser',
+				contentType : "application/json; charset=utf-8",
+				success : function(data){
+					APP.User = [];
+				},
+				dataType : 'json'
+			});
 		}
 
 	});

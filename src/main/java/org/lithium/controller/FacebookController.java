@@ -52,11 +52,14 @@ public class FacebookController {
 
 	@RequestMapping(value = "/saveFacebookUser", method = RequestMethod.POST)
 	@ResponseBody
-	public FacebookUserDTO saveFacebookDetails(@RequestBody FacebookUserDTO dto) {
+	public FacebookUserDTO saveFacebookDetails(HttpSession session, @RequestBody FacebookUserDTO dto) {
 		FacebookUser user = new FacebookUser();
 		LOG.debug(ToStringBuilder.reflectionToString(user));
 		LOG.debug(ToStringBuilder.reflectionToString(dto));
 		serviceMapper.map(dto, user);
+		
+		session.setAttribute("user", dto);
+		
 		LOG.debug(user.getId());
 		service.saveFacebookUser(user);
 		return dto;
