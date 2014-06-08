@@ -26,7 +26,7 @@
       "isId": false,
       "generator": null,
       "type": "varchar",
-      "size": 250
+      "size": 1000
     }
   ],
   "FacebookUsers": [
@@ -87,14 +87,14 @@
       "size": 255
     },
     {
-      "column": "timeZone",
+      "column": "timezone",
       "isId": false,
       "generator": null,
       "type": "varchar",
       "size": 12
     },
     {
-      "column": "updatedTime",
+      "column": "updated_time",
       "isId": false,
       "generator": null,
       "type": "varchar",

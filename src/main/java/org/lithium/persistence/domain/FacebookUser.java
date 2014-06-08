@@ -1,9 +1,13 @@
 package org.lithium.persistence.domain;
 
+import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="FacebookUsers")
@@ -74,21 +78,21 @@ public class FacebookUser {
 	public void setName(String name) {
 		this.name = name;
 	}
-	@Column(name="timeZone")
-	private String timeZone;
-	public String getTimeZone() {
-		return this.timeZone;
+	@Column(name="timezone")
+	private String timezone;
+	public String getTimezone() {
+		return this.timezone;
 	}
-	public void setTimeZone(String timeZone) {
-		this.timeZone = timeZone;
+	public void setTimezone(String timezone) {
+		this.timezone = timezone;
 	}
-	@Column(name="updatedTime")
-	private String updatedTime;
-	public String getUpdatedTime() {
-		return this.updatedTime;
+	@Column(name="updated_time")
+	private String updated_time;
+	public String getUpdated_time() {
+		return this.updated_time;
 	}
-	public void setUpdatedTime(String updatedTime) {
-		this.updatedTime = updatedTime;
+	public void setUpdated_time(String updated_time) {
+		this.updated_time = updated_time;
 	}
 	@Column(name="verified")
 	private Boolean verified;

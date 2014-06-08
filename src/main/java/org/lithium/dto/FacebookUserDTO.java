@@ -58,19 +58,19 @@ public class FacebookUserDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	private String timeZone;
-	public String getTimeZone() {
-		return this.timeZone;
+	private String timezone;
+	public String getTimezone() {
+		return this.timezone;
 	}
-	public void setTimeZone(String timeZone) {
-		this.timeZone = timeZone;
+	public void setTimezone(String timezone) {
+		this.timezone = timezone;
 	}
-	private String updatedTime;
-	public String getUpdatedTime() {
-		return this.updatedTime;
+	private String updated_time;
+	public String getUpdated_time() {
+		return this.updated_time;
 	}
-	public void setUpdatedTime(String updatedTime) {
-		this.updatedTime = updatedTime;
+	public void setUpdated_time(String updated_time) {
+		this.updated_time = updated_time;
 	}
 	private Boolean verified;
 	public Boolean getVerified() {

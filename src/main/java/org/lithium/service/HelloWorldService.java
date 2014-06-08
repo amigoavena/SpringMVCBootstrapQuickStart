@@ -143,7 +143,7 @@ public class HelloWorldService {
 	
 	@Transactional
 	public FacebookUser saveFacebookUser(FacebookUser user){
-		sessionFactory.getCurrentSession().save(user);
+		sessionFactory.getCurrentSession().saveOrUpdate(user);
 		return user;
 	}
 }

@@ -47,8 +47,8 @@ create table FacebookUsers (
  link varchar(255),
  locale varchar(24),
  name varchar(255),
- timeZone varchar(12),
- updatedTime varchar(32),
+ timezone varchar(12),
+ updated_time varchar(32),
  verified boolean
 );
 -- Table teams 
@@ -64,5 +64,5 @@ create table facebookAccessTokens (
  userID varchar(100),
  accessToken varchar(250),
  expiresIn int,
- signedRequest varchar(250)
+ signedRequest varchar(1000)
 );

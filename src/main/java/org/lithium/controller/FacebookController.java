@@ -2,6 +2,7 @@ package org.lithium.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 import org.dozer.Mapper;
 import org.lithium.dto.FacebookAccessTokenDTO;
@@ -32,8 +33,11 @@ public class FacebookController {
 	public FacebookAccessTokenDTO saveFacebookDetails(HttpSession session, @RequestBody FacebookAccessTokenDTO dto) {
 		FacebookAccessToken token = new FacebookAccessToken();
 		serviceMapper.map(dto, token);
+		
+		LOG.debug(dto);
+		LOG.debug(token);
 		LOG.warn(token.getSignedRequest().length());
-		//token = service.saveFBAccessToken(token);
+		token = service.saveFBAccessToken(token);
 		session.setAttribute("fbResponse", token);
 		serviceMapper.map(token,dto);
 		return dto;
@@ -52,10 +56,10 @@ public class FacebookController {
 
 	@RequestMapping(value = "/saveFacebookUser", method = RequestMethod.POST)
 	@ResponseBody
-	public FacebookUserDTO saveFacebookDetails(FacebookUserDTO dto) {
+	public FacebookUserDTO saveFacebookDetails(@RequestBody FacebookUserDTO dto) {
 		FacebookUser user = new FacebookUser();
-		LOG.debug(user);
-		LOG.debug(dto);
+		LOG.debug(ToStringBuilder.reflectionToString(user));
+		LOG.debug(ToStringBuilder.reflectionToString(dto));
 		serviceMapper.map(dto, user);
 		LOG.debug(user.getId());
 		service.saveFacebookUser(user);

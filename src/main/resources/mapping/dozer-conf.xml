@@ -98,12 +98,12 @@
 			<b>name</b>
 		</field>
 		<field>
-			<a>timeZone</a>
-			<b>timeZone</b>
+			<a>timezone</a>
+			<b>timezone</b>
 		</field>
 		<field>
-			<a>updatedTime</a>
-			<b>updatedTime</b>
+			<a>updated_time</a>
+			<b>updated_time</b>
 		</field>
 		<field>
 			<a>verified</a>

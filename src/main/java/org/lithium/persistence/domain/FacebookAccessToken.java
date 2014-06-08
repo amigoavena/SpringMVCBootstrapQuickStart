@@ -38,7 +38,7 @@ public class FacebookAccessToken {
 	public void setExpiresIn(Integer expiresIn) {
 		this.expiresIn = expiresIn;
 	}
-	@Column(name="signedRequest")
+	@Column(name="signedRequest",length=255)
 	private String signedRequest;
 	public String getSignedRequest() {
 		return this.signedRequest;

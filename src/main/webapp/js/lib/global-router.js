@@ -46,6 +46,7 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 		
 		facebookLoginFinalized: function(fbResponse) {
 			//amplify.publish('fb:login:click');
+			console.log(fbResponse);
 			$.ajax({
 				type : "POST",
 				url : 'saveFBAccessToken',
@@ -65,11 +66,11 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 		
 		facebookLogUser: function(fbResponse){
 			APP.User = fbResponse;
-			console.log(fbResponse);
+			console.log(APP.User);
 			$.ajax({
 				type : "POST",
 				url : 'saveFacebookUser',
-				data : JSON.stringify(fbResponse),
+				data : JSON.stringify(APP.User),
 				contentType : "application/json; charset=utf-8",
 				success : function(data){
 					//console.log(data);
