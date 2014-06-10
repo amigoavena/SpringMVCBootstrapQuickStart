@@ -27,19 +27,20 @@
 				<div id="menu" class="collapse navbar-collapse pull-right">
 					<p>
 					<ul class="nav nav-pills">
+						<li class="user-info"></li>
 						<li><a href="#"><i class="fa fa-home fa-fw"></i>Home</a></li>
 						<li><a href="#"><i class="fa fa-users fa-fw"></i>About</a></li>
 						<li><a id="tomala" href="#match/id=1"><i
 								class="fa fa-envelope-o fa-fw"></i>Contact</a></li>
 						<li><a id="adminMenu" href="#admin"><i
 								class="fa fa-cogs fa-fw"></i>Admin</a></li>
-						<li class="user-info"><a href="#" data-toggle="modal"
+						<li class="user-login"><a href="#" data-toggle="modal"
 							data-target="#socialLoginModal"><i class="fa fa-user fa-fw"></i>Login</a></li>
 					</ul>
 					</p>
 				</div>
 				<div class="row">
-					<div class="col-xs-5">
+					<div class="col-xs-4">
 						<p>
 							<img src="http://placehold.it/120x60">
 						</p>

@@ -134,7 +134,36 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 		
 		userLoaded : function() {
 			//console.log(APP.User);
+
+			console.log("clearing user-info");
 			$('.user-info').html('');
+			$('.user-login').html('');
+
+			var userInfo = $('<a/>', {
+						href:'#',
+						id : 'user-profile'
+			});
+			userInfo.append($('<i/>', {
+				class : 'fa fa-user fa-fw'
+			}));
+			userInfo.append('Welcome '+APP.User.name+'!');
+			console.log("appending user-info");
+
+			$('.user-info').append(userInfo);
+
+			var logOut = $('<a/>', {
+						href:'#',
+						id : 'user-logout'
+			});
+			logOut.append($('<i/>', {
+				class : 'fa fa-sign-out fa-fw'
+			}));
+			logOut.append('Log Out');
+			$('.user-login').append(logOut);
+
+
+			/*
+			
 			$('.user-info').toggleClass('dropdown');
 			var userMenu = $('<ul/>', {
 				id : 'user-menu',
@@ -163,6 +192,7 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 			$('.user-info').append(userInfo);
 			$('.user-info').append(userMenu);
 			//$('#user-menu').dropdown('hide');
+			*/
 			$('#user-logout').click(function(event){
 				event.preventDefault();
 				amplify.publish('user:logout:click');
@@ -173,6 +203,8 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 		userLogout : function() {
 			console.log('logout');
 			$('.user-info').html('');
+			$('.user-login').html('');
+
 			var logIn = $('<a/>', {
 				href : '#',
 				'data-target' : '#socialLoginModal',
@@ -182,7 +214,7 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 				class : 'fa fa-user fa-fw'
 			}));
 			logIn.append('Login');
-			$('.user-info').append(logIn);
+			$('.user-login').append(logIn);
 			$.ajax({
 				type : "GET",
 				url : 'logOutUser',
