@@ -1,7 +1,7 @@
 // Filename: app.js
 define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
-		'views/league.admin', 'views/admin', 'json2', 'facebook' ], function(
-		VIEWS, Welcome, Match, MatchEdit, LeagueAdmin, Admin) {
+		'views/league.admin', 'views/profile', 'views/admin', 'json2', 'facebook' ], function(
+		VIEWS, Welcome, Match, MatchEdit, LeagueAdmin, Profile, Admin) {
 
 	var c = APP.Commons;
 	var Router = Backbone.Router.extend({
@@ -11,7 +11,8 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 			'matchEdit/:params' : 'openMatchEdit',
 			'matches' : 'openMatchesList',
 			'leagueAdmin' : 'openLeagueAdmin',
-			'admin' : 'openAdmin'
+			'admin' : 'openAdmin',
+			'profile' : 'openProfile'
 		// ':viewId' : 'openView',
 		// ':viewId/:params' : 'openView',
 		},
@@ -124,6 +125,17 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 				data : data
 			});
 		},
+
+		openProfile : function(params) {
+			var data = c.urlToJSON(params);
+			console.log("openingProfile");
+			var profileView = new Profile({
+				el : $("#container"),
+				data : data
+			});
+			profileView.render();
+		},
+
 		openAdmin : function(params) {
 			var data = c.urlToJSON(params);
 			var adminView = new Admin({
@@ -140,7 +152,7 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 			$('.user-login').html('');
 
 			var userInfo = $('<a/>', {
-						href:'#',
+						href:'#profile',
 						id : 'user-profile'
 			});
 			userInfo.append($('<i/>', {

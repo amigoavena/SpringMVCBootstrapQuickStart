@@ -23,6 +23,8 @@ buildscript {
 
 repositories { mavenCentral() }
 
+war.archiveName "gue.war"
+
 dependencies {
 
 	def tomcatVersion = '7.0.52'
