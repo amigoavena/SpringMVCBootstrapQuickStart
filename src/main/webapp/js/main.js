@@ -87,7 +87,6 @@ requirejs([ 'commons', 'router', 'facebook' ], function(Commons, Router) {
 	//FB.login()
 
 
-
 	$('#facebook-btn').click(function(event){
 		event.preventDefault();
 		$('#socialLoginModal').modal('hide');

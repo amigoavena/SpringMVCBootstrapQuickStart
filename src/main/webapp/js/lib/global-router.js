@@ -44,6 +44,7 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 				success : function(data){
 					//console.log(data);
 					if(!c.isEmpty(data)){
+						console.log("extraInitialized");
 						APP.User = data;
 						amplify.publish("user:loaded");
 					}
@@ -133,7 +134,8 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 				el : $("#container"),
 				data : data
 			});
-			profileView.render();
+			console.log(APP.User);
+			profileView.render(APP.User);
 		},
 
 		openAdmin : function(params) {
