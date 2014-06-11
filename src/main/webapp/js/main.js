@@ -22,6 +22,7 @@ var REQJS_CONF = {
 		bootstrapValidator : 'lib/bootstrapValidator',
 		bootbox : 'lib/bootbox.min',
 		sockjs : 'lib/sockjs',
+		baseView : 'base-view',
 		text : 'lib/text',
 		views : 'views'
 	},

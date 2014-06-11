@@ -1,17 +1,8 @@
 define([
 // Using the Require.js text! plugin, we are loaded raw text
 // which will be used as our views primary template
-'text!templates/welcome.html' ], function(compiledTemplate) {
-	var ProjectListView = Backbone.View.extend({
-		render : function() {
-			console.log("rendering!");
-			$(this.el).html(compiledTemplate)
-			console.log("rendered");
-		},
-		destroy : function() {
-			console.log("destroying Welcome");
-		}
-	});
+'text!templates/welcome.html','baseView' ], function(compiledTemplate,BaseView) {
+	var WelcomeView = BaseView.extend();
 	// Our module now returns our view
-	return ProjectListView;
+	return WelcomeView;
 });
