@@ -9,7 +9,7 @@ define([
 
 			this.user= _user;
 			console.log("rendering!");
-			$("#content", this.el).html(compiledTemplate)
+			$(this.el).html(compiledTemplate)
 			console.log("rendered");
 			console.log($('#profile-picture img',this.el));
 			$('#profile-picture img',this.el).attr('src','https://graph.facebook.com/538066412981906/picture');
@@ -24,7 +24,11 @@ define([
 			$('#profile-pic',this.el).html('');
 			$('#profile-pic',this.el).append(userInfo);
 			
+		},
 
+		destroy : function() {
+			console.log("destroying Admin View");
+			this.undelegateEvents();
 		}
 	});
 	// Our module now returns our view

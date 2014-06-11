@@ -18,9 +18,9 @@ define([ 'json2' ], function() {
 		view : 'views/match.edit'
 	},
 	{
-		id : 'match-edit',
-		name : 'Match Edit',
-		view : 'views/match.edit'
+		id : 'profile',
+		name : 'Profile',
+		view : 'views/profile'
 	},
 	{
 		id : 'admin',
