@@ -13,13 +13,15 @@ define([
 
 		render : function() {
 			console.log("Admin rendering!");
-			$("#content", this.el).html(compiledTemplate)
+			$(this.el).html(compiledTemplate)
 			console.log("rendered");
 			this.getSports();
 		},
 		
 		initCustomEvents:function(){
 			console.log("customEvents!");
+			amplify.subscribe('admin:sport:changed',this.getSports);
+			amplify.subscribe('admin:sport:refresh', this.buildSportTable );
 		},
 
 		initialize : function(params) {
@@ -28,10 +30,7 @@ define([
 				this.id = params.data.id;
 			}
 			this.initCustomEvents();
-			this.render();
 			console.log("Admin match initialized");
-			amplify.subscribe('admin:sport:changed',this.getSports);
-			amplify.subscribe('admin:sport:refresh', this.buildSportTable );
 			$("#addSport", this.el).click(function() {
 				self.addSport();
 			});
@@ -160,6 +159,13 @@ define([
 
 		addLeague : function() {
 
+		},
+
+		destroy : function() {
+			console.log("destroying Admin View");
+			this.undelegateEvents();
+			amplify.unsubscribe('admin:sport:changed');
+			amplify.unsubscribe('admin:sport:refresh');
 		}
 
 	});

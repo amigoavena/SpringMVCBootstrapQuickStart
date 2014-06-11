@@ -91,7 +91,55 @@ define(
 				var modalElement = newInstance.find('.generic-modal');
 				modalElement.modal();
 				return modalElement;
-			}
+			};
+
+			// checks if the object/hash value is in the array
+			Commons.prototype.isInArray = function(_array,_fieldName,_value){
+				return !this.isEmpty(this.findInArray(_array,_fieldName,_value));
+			};
+
+			// removes the first matching object on the array
+			Commons.prototype.removeInArray = function(_array,_fieldName,_value) {
+				var index = this.indexInArray(_array, _fieldName, _value);
+				if(index >= 0) _array.splice(index,1);
+			};
+
+			// returns index of matching object
+			Commons.prototype.indexInArray = function(_array,_fieldName,_value){
+				var index = -1;
+				if(!this.isEmpty(_array)) {
+					$.each(_array,function(x,obj){
+						if((typeof _value == 'undefined' && obj === _fieldName) ||
+							(typeof obj[_fieldName] != 'undefined' && obj[_fieldName] === _value) ||
+							($.isNumeric(obj[_fieldName]) && $.isNumeric(_value)
+									&& Number(obj[_fieldName]) === Number(_value))) {
+							index = x;
+							return false;
+						}
+					});
+				}
+				return index;
+			};
+
+			// returns an object based on matched object/hashvalue
+			Commons.prototype.findInArray = function(_array,_fieldName,_value){
+				var foundObj = new Object();
+				$.each(_array,function(x,obj){
+					if((typeof _value == 'undefined' && obj === _fieldName) ||
+						(typeof obj[_fieldName] != 'undefined' && obj[_fieldName] === _value) ||
+						($.isNumeric(obj[_fieldName]) && $.isNumeric(_value)
+									&& Number(obj[_fieldName]) === Number(_value))) {
+						if(!$.isPlainObject()) {
+							foundObj = obj;
+						} else {
+							$.extend(true,foundObj,obj);
+						}
+
+						return false;
+					}
+				});
+				return foundObj;
+			};
 			
 			Commons.prototype.urlToJSON = function(url) {
 				var params = {};
@@ -106,6 +154,58 @@ define(
 					}
 				}
 				return params;
+
+
+			};
+
+
+			/**
+			 * converts urlParam (ex. var1=val1&var2=val2) into a JSON object
+			 * @param urlParam
+			 */
+			Commons.prototype.jsonParseUrl = function(urlParam) {
+				var urlParams = {};
+				var d = function(s){ return decodeURIComponent(s.replace(/\+/g, " "));};
+				var r = /([^?&=]+)=?([^&]*)/g;
+				var e;
+				if(!this.isEmpty(urlParam)) {
+					while (e = r.exec(urlParam)) {
+						urlParams[d(e[1])] = d(e[2]);
+					}
+				}
+				return urlParams;
+			};
+
+			/**
+			 * An efficient way to bind the Backbone.View as 'this' to all its functions
+			 * @param object
+			 */
+			Commons.prototype.backboneViewBindAll = function(object) {
+				var bindFunctions = this.getAllFunctionNames(object);
+
+				// bind all except for the Backbone.View functions
+				var backboneFunctions = this.getAllFunctionNames(Backbone.View.prototype);
+				this.removeInArray(backboneFunctions, 'render'); // include 'render' for binding
+				backboneFunctions.push('constructor'); // exclude 'constructor'
+
+				$.each(bindFunctions,function(x,functionName){
+					_.bindAll(object,functionName);
+				});
+			};
+
+			/**
+			 * Get all functions names of an object.
+			 * @param object
+			 * @returns a String array of function names
+			 */
+			Commons.prototype.getAllFunctionNames = function(object) {
+				var functionNames = [];
+				$.each(object,function(propertyName,propertyObject){
+					if(_.isFunction(propertyObject)) {
+						functionNames.push(propertyName);
+					}
+				});
+				return functionNames;
 			};
 
 			$.fn.showModal = function(header, content, callback) {

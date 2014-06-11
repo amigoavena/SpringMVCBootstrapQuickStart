@@ -12,6 +12,7 @@ var REQJS_CONF = {
 		backbone : 'lib/backbone-min',
 		json2 : 'lib/json2',
 		router : 'lib/global-router',
+		layout_manager : 'lib/layout-manager',
 		bootstrap : 'lib/bootstrap.min',
 		commons : 'lib/commons',
 		notify : 'lib/notify.min',
@@ -66,7 +67,7 @@ var REQJS_CONF = {
 
 require.config(REQJS_CONF);
 
-requirejs([ 'commons', 'router', 'facebook' ], function(Commons, Router) {
+requirejs([ 'commons', 'router', 'layout_manager', 'facebook',  ], function(Commons, Router, AppManager) {
 
 	_.extend(APP.Commons, new Commons());
 
@@ -93,6 +94,8 @@ requirejs([ 'commons', 'router', 'facebook' ], function(Commons, Router) {
 		amplify.publish('fb:login:click');
 	});
 	
+	var app = new AppManager();
+	app.render();
 
 	Backbone.history.start();
 

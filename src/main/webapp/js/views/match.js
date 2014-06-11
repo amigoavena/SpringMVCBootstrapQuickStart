@@ -14,24 +14,22 @@ define([
 
 		render : function() {
 			console.log("rendering!");
-			$("#content", this.el).html(compiledTemplate)
+			$(this.el).html(compiledTemplate)
 			console.log("rendered");
 		},
 
 		initialize : function(params) {
 			var self = this;
-			//console.log(params.data.id);
 			if(!c.isEmpty(params)){
-				this.id = params.data.id;
+				this.id = params.id;
 			}
-			this.render();
+
 			this.socket = new SockJS('hello');
-			stompClient = Stomp.over(this.socket);
-			stompClient.connect({}, function(frame) {
-				// setConnected(true);
+			this.stompClient = Stomp.over(this.socket);
+			this.stompClient.connect({}, function(frame) {
 				console.log('Connected: ' + frame);
 				console.log('subscribing to matchId:'+self.id);
-				stompClient.subscribe('/topic/match/'+self.id, function(greeting) {
+				self.stompClient.subscribe('/topic/match/'+self.id, function(greeting) {
 					console.log(greeting);
 					self.showGreeting(JSON.parse(greeting.body).message);
 				});
@@ -45,7 +43,7 @@ define([
 		sendName : function() {
 			var name = $('#name', this.el).val();
 			console.log(name);
-			stompClient.send("/app/matches", {}, JSON.stringify({
+			this.stompClient.send("/app/matches", {}, JSON.stringify({
 				'message' : name,
 				'from' : 'test'
 			}));
@@ -62,6 +60,18 @@ define([
 			});
 			document.title = message;
 			$('#response').html(message);
+		},
+
+		destroy : function() {
+			console.log("destroying Admin View");
+			try{
+				this.stompClient.disconnect();
+			} catch (e){
+				console.log(e)
+			}
+			this.undelegateEvents();
+			amplify.unsubscribe('admin:sport:changed');
+			amplify.unsubscribe('admin:sport:refresh');
 		}
 
 	});

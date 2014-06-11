@@ -5,8 +5,11 @@ define([
 	var ProjectListView = Backbone.View.extend({
 		render : function() {
 			console.log("rendering!");
-			$("#content", this.el).html(compiledTemplate)
+			$(this.el).html(compiledTemplate)
 			console.log("rendered");
+		},
+		destroy : function() {
+			console.log("destroying Welcome");
 		}
 	});
 	// Our module now returns our view

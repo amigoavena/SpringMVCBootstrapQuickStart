@@ -1,15 +1,13 @@
-// Filename: app-config.js
-
-define([ 'jquery', 'backbone', 'underscore', 'bootstrap' ], function($,
-		Backbone, _, Bootstrap) {
-
-	// Enable cross site scripting.
-	$.support.cors = true;
-
-	// Disable ajax cache.
-	$.ajaxSetup({
-		contentType: "application/json; charset=utf-8",
-		cache : false
-	});
-
-});
+/**
+ * This is where you register your libraries.
+ * The relative base url is on 'core/lib'
+ */
+var APP_LIBS ={
+	paths: {
+	//	bootstrap: '../../js/lib/bootstrap/bootstrap.min'
+	},
+	// set loading dependencies
+	shim:{
+		//bootstrap: ['jquery']
+	}
+};
