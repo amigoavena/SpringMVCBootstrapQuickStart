@@ -2,32 +2,53 @@ define([
 // Using the Require.js text! plugin, we are loaded raw text
 // which will be used as our views primary template
 'text!templates/profile.html' ], function(compiledTemplate) {
+
+	var c = APP.Commons;
+
 	var Profile = Backbone.View.extend({
 		user:null,
 
-		render : function(_user) {
+		render : function() {
 
-			this.user= _user;
-			console.log("rendering!");
-			$(this.el).html(compiledTemplate)
 			console.log("rendered");
-			console.log($('#profile-picture img',this.el));
-			$('#profile-picture img',this.el).attr('src','https://graph.facebook.com/538066412981906/picture');
-			console.log($('#profile-picture img',this.el));
+			$(this.el).html(compiledTemplate);
+
+			if(!c.isEmpty(APP.User)){
+				this.userLoaded();
+			}
+			
+		},
+
+		initCustomEvents:function(){
+			amplify.subscribe('user:loaded',this.userLoaded);
+		},
+
+		initialize : function(){
+			console.log("initialize");
+		},
+
+		userLoaded: function(){
 			console.log(APP.User);
+
+			if(c.isEmpty(APP.User)){
+
+				return false;
+
+
+			}
 
 			var userInfo = $('<img/>', {
 						src:'https://graph.facebook.com/'+APP.User.id+'/picture?height=200&width=200',
 						id : 'user-profile'
 			});
-
 			$('#profile-pic',this.el).html('');
 			$('#profile-pic',this.el).append(userInfo);
-			
+			$('#name',this.el).html(APP.User.name);
 		},
 
 		destroy : function() {
 			console.log("destroying Admin View");
+			amplify.unsubscribe('user:loaded');
 			this.undelegateEvents();
 		}
 	});
