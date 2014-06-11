@@ -16,24 +16,25 @@ define([
 			$(this.el).html(compiledTemplate)
 			console.log("rendered");
 			this.getSports();
+			var self = this;
+			$("#addSport", this.el).click(function() {
+				console.log("addSport")
+				self.addSport();
+			});
 		},
 		
 		initCustomEvents:function(){
 			console.log("customEvents!");
-			amplify.subscribe('admin:sport:changed',this.getSports);
-			amplify.subscribe('admin:sport:refresh', this.buildSportTable );
 		},
 
 		initialize : function(params) {
-			var self = this;
+			
 			if (!c.isEmpty(params)) {
 				this.id = params.data.id;
 			}
 			this.initCustomEvents();
 			console.log("Admin match initialized");
-			$("#addSport", this.el).click(function() {
-				self.addSport();
-			});
+			console.log($("#addSport", this.el));
 		},
 		
 		refreshSports: function(data){
@@ -46,7 +47,6 @@ define([
 
 		addSport : function() {
 			var self = this;
-			console.log("testing");
 			var data = {
 				sportId : null,
 				sportName : $('#sportname', this.el).val()
@@ -57,7 +57,7 @@ define([
 				data : JSON.stringify(data),
 				contentType : "application/json; charset=utf-8",
 				success : function(data){
-					amplify.publish('admin:sport:changed');
+					self.getSports();
 				},
 				dataType : 'json'
 			});
@@ -65,15 +65,13 @@ define([
 		},
 
 		getSports : function() {
+			console.log("getSports!");
 			var self = this;
 			$.ajax({
 				type : "GET",
 				url : 'getSports',
 				success : function(data) {
-					// amplify.publish('sport.refresh', data );
-					amplify.publish('admin:sport:refresh', data );
-					// self.sports = data;
-					// self.buildSportTable();
+					self.buildSportTable(data);
 				},
 				dataType : 'json'
 			});
@@ -129,7 +127,7 @@ define([
 							data : JSON.stringify(data),
 							contentType : "application/json; charset=utf-8",
 							success : function(data){
-								amplify.publish('admin:sport:changed');
+								self.getSports();
 							},
 							dataType : 'json'
 						});
@@ -138,9 +136,7 @@ define([
 				});
 			});
 			$('.sportDelete').click(function(event){
-				console.log(event);
 				var sportId = $(this).attr('id');
-				console.log(sportId);
 				event.preventDefault();
 				bootbox.confirm("Are you sure to delete the sport?", function(result) {
 					if(result){
@@ -148,7 +144,7 @@ define([
 							type : "DELETE",
 							url : 'deleteSport?sportId='+sportId,
 							success : function(data){
-								amplify.publish('admin:sport:changed');
+								self.getSports();
 							},
 							dataType : 'json'
 						});
@@ -164,8 +160,6 @@ define([
 		destroy : function() {
 			console.log("destroying Admin View");
 			this.undelegateEvents();
-			amplify.unsubscribe('admin:sport:changed');
-			amplify.unsubscribe('admin:sport:refresh');
 		}
 
 	});
