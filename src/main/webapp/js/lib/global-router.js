@@ -30,14 +30,26 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 			// when there are params to be passed globally
 			var appParams = c.jsonParseUrl(window.location.search);
 			_.extend(viewObj.data,appParams);
-			amplify.publish('app:show:view',viewId,viewObj)
+
+			if(viewId=== "login"){
+				var defaultView = c.findInArray(VIEWS,'isDefault',true);
+				this.openView(defaultView.id);
+				amplify.publish('app:show:login');
+			} else if ( viewId === "register") {
+				var defaultView = c.findInArray(VIEWS,'isDefault',true);
+				this.openView(defaultView.id);
+				amplify.publish('app:show:register');
+			} else {
+				amplify.publish('app:show:view',viewId,viewObj);
+			}
+			
 			/*
 			switch(viewObj.type) {
 				case 'tab' 		: amplify.publish('app:show:tab',viewId,viewObj);break;
 				case 'dialog'	: amplify.publish('app:show:popup',viewId,viewObj);break;
 				default			: break;
 			}*/
-		}
+		},
 
 	});
 

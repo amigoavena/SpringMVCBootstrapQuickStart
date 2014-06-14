@@ -36,6 +36,8 @@ define([ 'views', 'json2', 'facebook' ], function(
 			amplify.subscribe('user:loaded',this.userLoaded);
 			amplify.subscribe('user:logout:click',this.userLogout);
 			amplify.subscribe('app:show:view',this.displayView);
+			amplify.subscribe('app:show:login',this.showLogin);
+			amplify.subscribe('app:show:register',this.showRegister);
 		},
 
 		initialize : function() {
@@ -83,6 +85,16 @@ define([ 'views', 'json2', 'facebook' ], function(
 				dataType : 'json'
 			});
 
+		},
+
+		showLogin:function() {
+			console.log("showLogin");
+			$('#socialLoginModal').modal('show');
+		},
+
+		showRegister:function() {
+			console.log("showRegister");
+			$('#socialSignup').modal('show');
 		},
 
 		facebookClick : function() {
