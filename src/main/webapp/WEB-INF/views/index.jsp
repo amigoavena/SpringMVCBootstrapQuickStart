@@ -30,11 +30,11 @@
 					<ul class="nav nav-pills">
 						<li class="user-info"></li>
 						<li><a href="#welcome"><i class="fa fa-home fa-fw"></i>Home</a></li>
-						<li><a href="#schedule"><i class="fa fa-users fa-fw"></i>About</a></li>
+						<li><a href="#schedule"><i class="fa fa-users fa-fw"></i>Roles de Juego</a></li>
 						<li><a id="tomala" href="#match/id=1"><i
-								class="fa fa-envelope-o fa-fw"></i>Contact</a></li>
-						<li><a id="adminMenu" href="#admin"><i
-								class="fa fa-cogs fa-fw"></i>Admin</a></li>
+								class="fa fa-envelope-o fa-fw"></i>Contacto</a></li>
+						<li><a id="adminMenu" href="#admin" class="hidden"><i
+								class="fa fa-cogs fa-fw "></i>Administracion</a></li>
 						<li class="user-login"><a href="#" data-toggle="modal"
 							data-target="#socialLoginModal"><i class="fa fa-user fa-fw"></i>Login</a></li>
 					</ul>

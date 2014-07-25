@@ -19,8 +19,36 @@ define([
 		buildTable : function(){
 			$("#dataTable").handsontable({
 				colHeaders : ['Horario','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'],
+				columns:[
+					{
+					data: "hours",
+					readOnly: true
+					},
+					{
+					data: "monday"
+					},
+					{
+					data: "tuesday"
+					},
+					{
+					data: "wednesday"
+					},
+					{
+					data: "thursday"
+					},
+					{
+					data: "friday"
+					},
+					{
+					data: "saturday"
+					},
+					{
+					data: "sunday"
+					},
+				],
 				//data: this.data,
 				//startRows: 6,
+
 				startCols: 8
 			});
 		},
