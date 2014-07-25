@@ -18,6 +18,7 @@ var REQJS_CONF = {
 		notify : 'lib/notify.min',
 		growl : 'lib/bootstrap-growl.min',
 		stomp : 'lib/stomp',
+		handsomeTable : 'lib/jquery.handsontable.full',
 		facebook : '//connect.facebook.net/en_US/all',
 		bootstrapValidator : 'lib/bootstrapValidator',
 		bootbox : 'lib/bootbox.min',
@@ -55,6 +56,9 @@ var REQJS_CONF = {
 		},
 		'growl' : {
 			deps : [ 'jquery', 'bootstrap' ]
+		},
+		'handsomeTable' : {
+			deps : [ 'jquery' ]
 		},
 		'facebook' : {
 			exports : 'FB'

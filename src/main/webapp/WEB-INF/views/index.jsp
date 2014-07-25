@@ -12,6 +12,7 @@
 <link href="css/bootstrap-social.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Raleway'
 	rel='stylesheet' type='text/css'>
+<link rel="stylesheet" media="screen" href="css/jquery.handsontable.full.css">
 <link href="css/main.css" rel="stylesheet">
 <script type="text/javascript" src="js/lib/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="js/lib/underscore-min.js"></script>
@@ -28,8 +29,8 @@
 					<p>
 					<ul class="nav nav-pills">
 						<li class="user-info"></li>
-						<li><a href="#"><i class="fa fa-home fa-fw"></i>Home</a></li>
-						<li><a href="#"><i class="fa fa-users fa-fw"></i>About</a></li>
+						<li><a href="#welcome"><i class="fa fa-home fa-fw"></i>Home</a></li>
+						<li><a href="#schedule"><i class="fa fa-users fa-fw"></i>About</a></li>
 						<li><a id="tomala" href="#match/id=1"><i
 								class="fa fa-envelope-o fa-fw"></i>Contact</a></li>
 						<li><a id="adminMenu" href="#admin"><i
@@ -59,7 +60,7 @@
 		<div id="content"></div>
 
 		<div class="footer">
-			<p>&copy; Company 2014</p>
+			<p>&copy; 8Engine.com 2014</p>
 		</div>
 
 		<!-- Modal -->

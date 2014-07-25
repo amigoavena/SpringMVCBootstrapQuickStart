@@ -327,29 +327,14 @@ define([ 'views', 'json2', 'facebook' ], function(
 			if(!c.isEmpty(this.currentView)){
 				this.closeView(this.currentView);
 			}
-			//self.openedWindows.push(newView);
-
 			// instantiate new view
 			require([objView.view],function(ObjectView) {
 				ObjectView.prototype.el = _$container;
 				newView.view = new ObjectView(_data.data);
 				c.backboneViewBindAll(newView.view);
 				if(_.isFunction(newView.view.initCustomEvents)) newView.view.initCustomEvents();
-
-				var label = c.isEmpty(objView.data) ? objView.name : _.template(objView.name,objView.data);
-				//self.updateViewTitle(newView.view, label);
 				newView.view.render();
-				$('a.app-button',_$container).button();
-
 				self.currentView =  newView.view;
-
-				/*if(_$container.data('uiDialog')) {
-					_$container.dialog('option','position',{
-						my: 'center',
-						at: 'center',
-						of: window });
-				}*/
-
 				if($.isFunction(_fnCallback)) {
 					_fnCallback();
 				}

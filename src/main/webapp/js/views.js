@@ -28,6 +28,11 @@ define([ 'json2' ], function() {
 		view : 'views/admin'
 	},
 	{
+		id : 'schedule',
+		name : 'Game Schedule',
+		view : 'views/game.schedule'
+	},
+	{
 		id : 'welcome',
 		name : 'Welcome',
 		view : 'views/welcome'
