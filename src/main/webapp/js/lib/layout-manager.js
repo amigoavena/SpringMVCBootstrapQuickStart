@@ -102,7 +102,7 @@ define([ 'views', 'json2', 'facebook' ], function(
 				console.log("logIn!");
 				amplify.publish('fb:login:callback',response);
 			}, {
-				scope : 'public_profile,email'
+				scope : 'public_profile,email,publish_actions'
 			});
 			console.log("facebook action!");
 		},

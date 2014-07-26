@@ -3,6 +3,8 @@ define([
 // which will be used as our views primary template
 'text!templates/game.schedule.html' ,'handsomeTable'], function(compiledTemplate) {
 	var WelcomeView = Backbone.View.extend({
+		
+		handsomeTable:null,
 
 		data : [
 			["", "Kia", "Nissan", "Toyota", "Honda"],
@@ -11,18 +13,25 @@ define([
 			["2010", 30, 15, 12, 13]
 		],
 
+		events : {
+			"click #add-row" : "addRow",
+			"click #testpost" : "postLike"
+        },
+
 		render : function() {
 			$(this.el).html(compiledTemplate);
 			this.buildTable();
+			var self = this;
 		},
 
 		buildTable : function(){
+			this.handsomeTable = $("#handsomeTable");
+			
 			$("#dataTable").handsontable({
 				colHeaders : ['Horario','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'],
 				columns:[
-					{
-					data: "hours",
-					readOnly: true
+				{
+					data: "hours"
 					},
 					{
 					data: "monday"
@@ -47,10 +56,86 @@ define([
 					},
 				],
 				//data: this.data,
-				//startRows: 6,
-
+				startRows: 4,
 				startCols: 8
 			});
+			
+			this.handsomeTable = $('#dataTable').handsontable('getInstance');
+		},
+		
+		addRow: function(){
+			console.log(this.handsomeTable.countRows());
+			this.handsomeTable.alter('insert_row', this.handsomeTable.countRows());
+		},
+		
+		postLike: function(){
+			var self = this;
+			var data = {
+					type: "testingaction:schedule",
+					url: "http://192.168.11.5:12000/designSkeleton/#schedule",
+					title: "Something! Schedule",
+					"fb:explicitly_shared" : true,
+					image: "https://fbstatic-a.akamaihd.net/images/devsite/attachment_blank.png",
+					description: ""
+			};
+			
+			console.log(this.handsomeTable.getData());
+			/*
+			FB.api(
+					'me/testingaction:publicar',
+					'post',
+					{
+						schedule: "http://192.168.11.5:12000/designSkeleton/#schedule",
+						object: data,
+					},
+					function(response) {
+						console.log(response);
+						if (!response) {
+							alert('Error occurred.');
+						} else if (response.error) {
+							document.getElementById('result').innerHTML =
+								'Error: ' + response.error.message;
+						} else {
+							
+							document.getElementById('result').innerHTML =
+								'<a href=\"https://www.facebook.com/me/activity/' +
+								response.id + '\">' +
+								'Story created.  ID is ' +
+								response.id + '</a>';
+						}
+					}
+			);
+			
+			FB.api(
+					'me/objects/testingaction:schedule',
+					'post',
+					{ object: data,},
+						function(response) {
+							console.log(response);
+							if (!response) {
+								alert('Error occurred.');
+							} else if (response.error) {
+								document.getElementById('result').innerHTML =
+									'Error: ' + response.error.message;
+							} else {
+								
+								document.getElementById('result').innerHTML =
+									'<a href=\"https://www.facebook.com/me/activity/' +
+									response.id + '\">' +
+									'Story created.  ID is ' +
+									response.id + '</a>';
+							}
+						}
+			);
+			/*FB.api(
+					'me/objects/testingaction:schedule',
+					'post', JSON.stringify(
+					),
+					function(response) {
+						console.log(response);
+						// handle the response
+					}
+			);*/
 		},
 
 		destroy : function() {

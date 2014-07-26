@@ -22,7 +22,10 @@ var REQJS_CONF = {
 		facebook : '//connect.facebook.net/en_US/all',
 		bootstrapValidator : 'lib/bootstrapValidator',
 		bootbox : 'lib/bootbox.min',
+		moment : 'lib/moment.min',
+		jstz : 'lib/jstz.min',
 		sockjs : 'lib/sockjs',
+		calendar : 'lib/calendar',
 		text : 'lib/text',
 		views : 'views'
 	},
@@ -79,8 +82,8 @@ requirejs([ 'commons', 'router', 'layout_manager', 'facebook',  ], function(Comm
 	_.extend(APP.Router, new Router());
 
 	FB.init({
-		//appId : '782219015121928',
-		appId: '782178938459269'
+		appId : '782219015121928',
+		//appId: '782178938459269'
 	});
 	
 	/*FB.getLoginStatus(function(response) {
