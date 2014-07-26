@@ -31,11 +31,13 @@ define([
 				colHeaders : ['Horario','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'],
 				columns:[
 				{
-					data: "hours"
-					},
-					{
+					data: "hours",
+					editor: 'select',
+					selectOptions: ["5 PM","6 PM","7PM","8PM","9PM", "10PM", "11PM", "12AM"]
+				},
+				{
 					data: "monday"
-					},
+				},
 					{
 					data: "tuesday"
 					},
@@ -55,7 +57,7 @@ define([
 					data: "sunday"
 					},
 				],
-				//data: this.data,
+				// data: this.data,
 				startRows: 4,
 				startCols: 8
 			});
@@ -81,61 +83,30 @@ define([
 			
 			console.log(this.handsomeTable.getData());
 			/*
-			FB.api(
-					'me/testingaction:publicar',
-					'post',
-					{
-						schedule: "http://192.168.11.5:12000/designSkeleton/#schedule",
-						object: data,
-					},
-					function(response) {
-						console.log(response);
-						if (!response) {
-							alert('Error occurred.');
-						} else if (response.error) {
-							document.getElementById('result').innerHTML =
-								'Error: ' + response.error.message;
-						} else {
-							
-							document.getElementById('result').innerHTML =
-								'<a href=\"https://www.facebook.com/me/activity/' +
-								response.id + '\">' +
-								'Story created.  ID is ' +
-								response.id + '</a>';
-						}
-					}
-			);
-			
-			FB.api(
-					'me/objects/testingaction:schedule',
-					'post',
-					{ object: data,},
-						function(response) {
-							console.log(response);
-							if (!response) {
-								alert('Error occurred.');
-							} else if (response.error) {
-								document.getElementById('result').innerHTML =
-									'Error: ' + response.error.message;
-							} else {
-								
-								document.getElementById('result').innerHTML =
-									'<a href=\"https://www.facebook.com/me/activity/' +
-									response.id + '\">' +
-									'Story created.  ID is ' +
-									response.id + '</a>';
-							}
-						}
-			);
-			/*FB.api(
-					'me/objects/testingaction:schedule',
-					'post', JSON.stringify(
-					),
-					function(response) {
-						console.log(response);
-						// handle the response
-					}
-			);*/
+			 * FB.api( 'me/testingaction:publicar', 'post', { schedule:
+			 * "http://192.168.11.5:12000/designSkeleton/#schedule", object:
+			 * data, }, function(response) { console.log(response); if
+			 * (!response) { alert('Error occurred.'); } else if
+			 * (response.error) { document.getElementById('result').innerHTML =
+			 * 'Error: ' + response.error.message; } else {
+			 * 
+			 * document.getElementById('result').innerHTML = '<a
+			 * href=\"https://www.facebook.com/me/activity/' + response.id +
+			 * '\">' + 'Story created. ID is ' + response.id + '</a>'; } } );
+			 * 
+			 * FB.api( 'me/objects/testingaction:schedule', 'post', { object:
+			 * data,}, function(response) { console.log(response); if
+			 * (!response) { alert('Error occurred.'); } else if
+			 * (response.error) { document.getElementById('result').innerHTML =
+			 * 'Error: ' + response.error.message; } else {
+			 * 
+			 * document.getElementById('result').innerHTML = '<a
+			 * href=\"https://www.facebook.com/me/activity/' + response.id +
+			 * '\">' + 'Story created. ID is ' + response.id + '</a>'; } } );
+			 * /*FB.api( 'me/objects/testingaction:schedule', 'post',
+			 * JSON.stringify( ), function(response) { console.log(response); //
+			 * handle the response } );
+			 */
 		},
 
 		destroy : function() {
