@@ -33,7 +33,7 @@ define([
 				{
 					data: "hours",
 					editor: 'select',
-					selectOptions: ["5 PM","6 PM","7PM","8PM","9PM", "10PM", "11PM", "12AM"]
+					selectOptions: ["5 PM","6 PM","7 PM","8 PM","9 PM", "10 PM", "11 PM", "12 AM"]
 				},
 				{
 					data: "monday"
