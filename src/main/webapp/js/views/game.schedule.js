@@ -1,10 +1,12 @@
 define([
 // Using the Require.js text! plugin, we are loaded raw text
 // which will be used as our views primary template
-'text!templates/game.schedule.html' ,'handsomeTable'], function(compiledTemplate) {
+'text!templates/game.schedule.html' ,'handsomeTable','moment'], function(compiledTemplate) {
 	var WelcomeView = Backbone.View.extend({
 		
 		handsomeTable:null,
+		currentWeek: null,
+		yearWeeks: null,
 
 		data : [
 			["", "Kia", "Nissan", "Toyota", "Honda"],
@@ -15,7 +17,7 @@ define([
 
 		events : {
 			"click #add-row" : "addRow",
-			"click #testpost" : "postLike"
+			"click #save-schedule" : "saveSchedule"
         },
 
 		render : function() {
@@ -26,18 +28,37 @@ define([
 
 		buildTable : function(){
 			this.handsomeTable = $("#handsomeTable");
+
+			var now = moment();
+
+			this.currentWeek = now.week();
+			this.yearWeeks = now.isoWeeksInYear();
+
+			console.log(this.currentWeek);
+			console.log(this.yearWeeks);
+
+			$("#week-label").html("Semana "+this.currentWeek+" de "+this.yearWeeks);
+
 			
 			$("#dataTable").handsontable({
-				colHeaders : ['Horario','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo'],
+				colHeaders : [
+						'Horario',
+						'Lunes '+ now.isoWeekday(1).date() ,
+						'Martes ' + now.isoWeekday(2).date(),
+						'Miercoles ' + now.isoWeekday(3).date(),
+						'Jueves ' + now.isoWeekday(4).date(),
+						'Viernes ' + now.isoWeekday(5).date(),
+						'Sabado ' + now.isoWeekday(6).date(),
+						'Domingo ' + now.isoWeekday(7).date()],
 				columns:[
-				{
+					{
 					data: "hours",
 					editor: 'select',
 					selectOptions: ["5 PM","6 PM","7 PM","8 PM","9 PM", "10 PM", "11 PM", "12 AM"]
-				},
-				{
+					},
+					{
 					data: "monday"
-				},
+					},
 					{
 					data: "tuesday"
 					},
@@ -63,6 +84,10 @@ define([
 			});
 			
 			this.handsomeTable = $('#dataTable').handsontable('getInstance');
+		},
+
+		saveSchedule: function(){
+			console.log(this.handsomeTable.getData());
 		},
 		
 		addRow: function(){

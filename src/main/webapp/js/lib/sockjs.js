@@ -1210,20 +1210,25 @@ var WebSocketTransport = SockJS.websocket = function(ri, trans_url) {
     that.url = url;
     var Constructor = _window.WebSocket || _window.MozWebSocket;
 
-    that.ws = new Constructor(that.url);
-    that.ws.onmessage = function(e) {
-        that.ri._didMessage(e.data);
-    };
-    // Firefox has an interesting bug. If a websocket connection is
-    // created after onunload, it stays alive even when user
-    // navigates away from the page. In such situation let's lie -
-    // let's not open the ws connection at all. See:
-    // https://github.com/sockjs/sockjs-client/issues/28
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=696085
-    that.unload_ref = utils.unload_add(function(){that.ws.close()});
-    that.ws.onclose = function() {
-        that.ri._didMessage(utils.closeFrame(1006, "WebSocket connection broken"));
-    };
+    console.log(typeof(that.url));
+    try {
+        that.ws = new Constructor(that.url);
+        that.ws.onmessage = function(e) {
+            that.ri._didMessage(e.data);
+        };
+        // Firefox has an interesting bug. If a websocket connection is
+        // created after onunload, it stays alive even when user
+        // navigates away from the page. In such situation let's lie -
+        // let's not open the ws connection at all. See:
+        // https://github.com/sockjs/sockjs-client/issues/28
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=696085
+        that.unload_ref = utils.unload_add(function(){that.ws.close()});
+        that.ws.onclose = function() {
+            that.ri._didMessage(utils.closeFrame(1006, "WebSocket connection broken"));
+        };
+    } catch (e){
+        
+    }
 };
 
 WebSocketTransport.prototype.doSend = function(data) {
