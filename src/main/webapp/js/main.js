@@ -25,6 +25,7 @@ var REQJS_CONF = {
 		moment : 'lib/moment.min',
 		jstz : 'lib/jstz.min',
 		sockjs : 'lib/sockjs',
+		ajaxConfig : 'ajax.app-config',
 		calendar : 'lib/calendar',
 		text : 'lib/text',
 		views : 'views'
@@ -51,6 +52,8 @@ var REQJS_CONF = {
 			deps : [ 'sockjs' ],
 			exports : 'Stomp'
 		},
+		'ajaxConfig' :  ['commons'],
+		'layout_manager' : ['ajaxConfig'],
 		'bootbox' : {
 			deps : [ 'jquery', 'bootstrap' ]
 		},

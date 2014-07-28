@@ -54,6 +54,7 @@ define([
 			$.ajax({
 				type : "POST",
 				url : 'saveSport',
+				enableLoading : true,
 				data : JSON.stringify(data),
 				contentType : "application/json; charset=utf-8",
 				success : function(data){

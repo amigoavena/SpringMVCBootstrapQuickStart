@@ -38,6 +38,8 @@ define([ 'views', 'json2', 'facebook' ], function(
 			amplify.subscribe('app:show:view',this.displayView);
 			amplify.subscribe('app:show:login',this.showLogin);
 			amplify.subscribe('app:show:register',this.showRegister);
+			amplify.subscribe('app:show:loading',this.showLoadingPopup);
+			amplify.subscribe('app:hide:loading',this.hideLoadingPopup);
 		},
 
 		initialize : function() {
@@ -368,6 +370,55 @@ define([ 'views', 'json2', 'facebook' ], function(
 						c.removeInArray(self.openedWindows,openedWindow);
 					});
 			*/
+		},
+
+		/**
+		 * TODO add this to the 'openedWindows' implementation
+		 * @param msg
+		 */
+		showLoadingPopup:function(msg) {
+			/*// Create only if not instantiated
+			if(c.isEmpty(this.loadingDialog)) {
+				$(this.el).append($('<div/>',{
+					id:'loading-dialog'
+				}));
+				this.loadingDialog = $('div#loading-dialog');
+				this.dialogCount = 1;
+			}
+			// Setup dialog only if not instantiated
+			if(!$(this.loadingDialog).data('uiDialog')) {
+				var self = this;
+				$(this.loadingDialog).dialog({
+					title:'System Message'
+					,height:70
+					,draggable:false
+					,modal:true
+					,resizable:false
+					,closeOnEscape:false
+					,close:function(event,ui) {
+						$(this).remove();
+						self.loadingDialog = null;
+					}
+				});
+				this.loadingDialog.closest('.ui-dialog').find('.ui-dialog-titlebar-close').hide();
+				this.loadingDialog.addEventMsg('msg-loading',msg);
+				$('#msg-loading',this.loadingDialog).addProgressAnimation();
+			} else {
+				// Update count of ajax loading instances
+				this.dialogCount++;
+			}*/
+			console.log("LoadingData");
+			$('#loadingmodal').modal('show');
+		},
+
+
+		/**
+		 * TODO use this.closeWindow instead of this one.
+		 */
+		hideLoadingPopup:function() {
+			//console.log($(this.loadingDialog).data());
+			// Decrement the ajax loading instances
+			$('#loadingmodal').modal('hide');
 		},
 	});
 
