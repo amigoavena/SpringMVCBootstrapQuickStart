@@ -1,6 +1,8 @@
 package org.lithium.dto;
 
 import java.sql.Timestamp;
+
+import org.hibernate.annotations.Type;
 public class MatchDTO {
 	private String matchId;
 	public String getMatchId() {

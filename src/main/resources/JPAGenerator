@@ -35,7 +35,7 @@ def main():
 
 def createORM(table,isDTO):
 	tableUpper = "%s%s"%(table[:1].upper(),table[1:-1])
-	#print tableUpper
+	print tableUpper
 	if isDTO:
 		dtoFile = file('../java/org/lithium/dto/%sDTO.java' % tableUpper ,'w+')
 		dtoFile.write('package org.lithium.dto;\n')
@@ -43,6 +43,7 @@ def createORM(table,isDTO):
 		dtoFile = file('../java/org/lithium/persistence/domain/%s.java' % tableUpper ,'w+')
 		dtoFile.write('package org.lithium.persistence.domain;\n')
 	dtoFile.write('\nimport java.sql.Timestamp;\n')
+	dtoFile.write('\nimport org.hibernate.annotations.Type;\n')
 	if not isDTO:
 		dtoFile.write('import javax.persistence.Column;\nimport javax.persistence.Entity;\nimport javax.persistence.GeneratedValue;\n')
 		dtoFile.write('import javax.persistence.Id;\nimport javax.persistence.Table;\n\nimport org.hibernate.annotations.GenericGenerator;\n\n@Entity\n')
@@ -55,6 +56,8 @@ def createORM(table,isDTO):
 				fieldName = '%s%s' % (field['column'][:1].upper(),field['column'][1:])
 				columnName = field['column']
 				if field['type'] == 'varchar':
+					fieldtype = 'String'
+				if field['type'] == 'text':
 					fieldtype = 'String'
 				elif field['type'] == 'int':
 					fieldtype = 'Integer'
@@ -71,6 +74,8 @@ def createORM(table,isDTO):
 						dtoFile.write('\t@GeneratedValue(generator="%s-uuid")\n' % tableUpper.lower())
 						dtoFile.write('\t@GenericGenerator(name="%s-uuid", strategy = "%s")\n' % (tableUpper.lower(),field['generator']) )
 					dtoFile.write('\t@Column(name="%s")\n' % field['column'] )
+					if field['type'] == 'text':
+						dtoFile.write('\t@Type(type="%s")\n' % field['type'] )
 				dtoFile.write('\tprivate %s %s;\n' % (fieldtype,columnName))
 				dtoFile.write('\tpublic %s get%s() {\n' % (fieldtype,fieldName) )
 				dtoFile.write('\t\treturn this.%s;\n\t}\n'%columnName)

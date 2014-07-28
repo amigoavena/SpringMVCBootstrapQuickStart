@@ -1,6 +1,8 @@
 package org.lithium.persistence.domain;
 
 import java.sql.Timestamp;
+
+import org.hibernate.annotations.Type;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

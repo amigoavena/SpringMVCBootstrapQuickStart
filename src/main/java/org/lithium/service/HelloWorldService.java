@@ -51,6 +51,12 @@ public class HelloWorldService {
 	}
 	
 	@Transactional
+	public FacebookAccessToken saveOrUpdateFBAccessToken(FacebookAccessToken token) {
+		sessionFactory.getCurrentSession().saveOrUpdate(token);
+		return token;
+	}
+	
+	@Transactional
 	public FacebookAccessToken updateFBAccessToken(FacebookAccessToken token) {
 		sessionFactory.getCurrentSession().update(token);
 		return token;

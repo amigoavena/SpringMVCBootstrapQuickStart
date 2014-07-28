@@ -1,4 +1,40 @@
 {
+  "gameSchedules": [
+    {
+      "column": "scheduleId",
+      "isId": true,
+      "generator": null,
+      "type": "varchar",
+      "size": 32
+    },
+    {
+      "column": "leagueId",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 32
+    },
+    {
+      "column": "weekId",
+      "isId": false,
+      "generator": null,
+      "type": "int",
+      "size": null
+    },
+    {
+      "column": "matchID",
+      "isId": false,
+      "generator": null,
+      "type": "varchar",
+      "size": 250
+    },
+    {
+      "column": "comments",
+      "isId": false,
+      "generator": null,
+      "type": "text"
+    }
+  ],
   "facebookAccessTokens": [
     {
       "column": "userID",
@@ -25,8 +61,7 @@
       "column": "signedRequest",
       "isId": false,
       "generator": null,
-      "type": "varchar",
-      "size": 1000
+      "type": "text"
     }
   ],
   "FacebookUsers": [

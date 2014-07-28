@@ -33,7 +33,7 @@ public class FacebookController {
 	public FacebookAccessTokenDTO saveFacebookDetails(HttpSession session, @RequestBody FacebookAccessTokenDTO dto) {
 		FacebookAccessToken token = new FacebookAccessToken();
 		serviceMapper.map(dto, token);
-		//token = service.saveFBAccessToken(token);
+		token = service.saveOrUpdateFBAccessToken(token);
 		session.setAttribute("fbResponse", token);
 		serviceMapper.map(token,dto);
 		return dto;

@@ -21,11 +21,6 @@ create table places (
  state varchar(100),
  country varchar(100)
 );
--- Table sports 
-create table sports (
- sportId bigint,
- sportName varchar(250)
-);
 -- Table scores 
 create table scores (
  scoreID varchar(32),
@@ -36,6 +31,14 @@ create table scores (
  scoreTime varchar(50),
  scoreDate timestamp,
  updateUser varchar(50)
+);
+-- Table teams 
+create table teams (
+ teamId varchar(32),
+ teamName varchar(250),
+ leagueId varchar(32),
+ imageLocation varchar(250),
+ description varchar(250)
 );
 -- Table FacebookUsers 
 create table FacebookUsers (
@@ -51,18 +54,23 @@ create table FacebookUsers (
  updated_time varchar(32),
  verified boolean
 );
--- Table teams 
-create table teams (
- teamId varchar(32),
- teamName varchar(250),
+-- Table gameSchedules 
+create table gameSchedules (
+ scheduleId varchar(32),
  leagueId varchar(32),
- imageLocation varchar(250),
- description varchar(250)
+ weekId int,
+ matchID varchar(250),
+ comments text
+);
+-- Table sports 
+create table sports (
+ sportId bigint,
+ sportName varchar(250)
 );
 -- Table facebookAccessTokens 
 create table facebookAccessTokens (
  userID varchar(100),
  accessToken varchar(250),
  expiresIn int,
- signedRequest varchar(1000)
+ signedRequest text
 );

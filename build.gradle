@@ -60,6 +60,10 @@ dependencies {
 	
 	//Dozer Mapping
 	compile 'net.sf.dozer:dozer:5.4.0'
+
+	// Database Pooling
+	compile 'org.apache.tomcat:tomcat-jdbc:7.0.54',
+			'mysql:mysql-connector-java:5.1.6'
 	
 	runtime "org.slf4j:slf4j-log4j12:1.7.2"
 

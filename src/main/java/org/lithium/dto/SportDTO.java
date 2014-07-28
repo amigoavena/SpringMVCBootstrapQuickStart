@@ -1,6 +1,8 @@
 package org.lithium.dto;
 
 import java.sql.Timestamp;
+
+import org.hibernate.annotations.Type;
 public class SportDTO {
 	private Long sportId;
 	public Long getSportId() {

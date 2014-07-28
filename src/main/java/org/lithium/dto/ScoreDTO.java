@@ -1,6 +1,8 @@
 package org.lithium.dto;
 
 import java.sql.Timestamp;
+
+import org.hibernate.annotations.Type;
 public class ScoreDTO {
 	private String scoreID;
 	public String getScoreID() {

@@ -1,6 +1,8 @@
 package org.lithium.persistence.domain;
 
 import java.sql.Timestamp;
+
+import org.hibernate.annotations.Type;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +40,8 @@ public class FacebookAccessToken {
 	public void setExpiresIn(Integer expiresIn) {
 		this.expiresIn = expiresIn;
 	}
-	@Column(name="signedRequest",length=255)
+	@Column(name="signedRequest")
+	@Type(type="text")
 	private String signedRequest;
 	public String getSignedRequest() {
 		return this.signedRequest;

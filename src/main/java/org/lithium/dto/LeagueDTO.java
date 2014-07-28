@@ -1,6 +1,8 @@
 package org.lithium.dto;
 
 import java.sql.Timestamp;
+
+import org.hibernate.annotations.Type;
 public class LeagueDTO {
 	private String leagueId;
 	public String getLeagueId() {
