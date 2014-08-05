@@ -9,7 +9,7 @@
 			<param name="ConversionPattern" value="%d{HH:mm:ss} [%t] %c{1} - %m%n" />
 		</layout>
 	</appender>
-	
+
 	<logger name="org.springframework">
 		<level value="warn" />
 	</logger>
@@ -33,14 +33,14 @@
 	<logger name="org.springframework.security">
 		<level value="warn" />
 	</logger>
-	
+
 	<logger name="org.hibernate">
-		<level value="warn"/>
+		<level value="warn" />
 	</logger>
 
 	<root>
 		<priority value="debug" />
 		<appender-ref ref="console" />
 	</root>
-	
+
 </log4j:configuration>

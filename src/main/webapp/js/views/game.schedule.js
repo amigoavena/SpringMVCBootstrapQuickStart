@@ -2,10 +2,14 @@ define([
 // Using the Require.js text! plugin, we are loaded raw text
 // which will be used as our views primary template
 'text!templates/game.schedule.html' ,'handsomeTable','moment'], function(compiledTemplate) {
+
+	var c = APP.Commons;
+
 	var WelcomeView = Backbone.View.extend({
 		
 		handsomeTable:null,
 		currentWeek: null,
+		momentParam : null,
 		yearWeeks: null,
 
 		data : [
@@ -20,6 +24,17 @@ define([
 			"click #save-schedule" : "saveSchedule"
         },
 
+        initialize : function(params){
+        	var now = moment();
+        	if( !c.isEmpty(params) && !c.isEmpty(params.week) && params.week <= now.isoWeeksInYear() ){
+        		this.momentParam = moment().week(params.week);
+        		this.currentWeek = this.momentParam.week();
+        		if(this.momentParam.isoWeeksInYear() < this.currentWeek){
+        			this.currentWeek = this.momentParam.isoWeeksInYear()
+        		}
+        	}
+        },
+
 		render : function() {
 			$(this.el).html(compiledTemplate);
 			this.buildTable();
@@ -31,25 +46,25 @@ define([
 
 			var now = moment();
 
-			this.currentWeek = now.week();
+			if(c.isEmpty(this.currentWeek)){
+				console.log("is empty!?");
+				this.currentWeek = now.week();
+			} else {
+				now = moment().week(this.currentWeek);
+			}
+
 			this.yearWeeks = now.isoWeeksInYear();
-
-			console.log(this.currentWeek);
-			console.log(this.yearWeeks);
-
 			$("#week-label").html("Semana "+this.currentWeek+" de "+this.yearWeeks);
-
-			
 			$("#dataTable").handsontable({
 				colHeaders : [
 						'Horario',
-						'Lunes '+ now.isoWeekday(1).date() ,
-						'Martes ' + now.isoWeekday(2).date(),
-						'Miercoles ' + now.isoWeekday(3).date(),
-						'Jueves ' + now.isoWeekday(4).date(),
-						'Viernes ' + now.isoWeekday(5).date(),
-						'Sabado ' + now.isoWeekday(6).date(),
-						'Domingo ' + now.isoWeekday(7).date()],
+						'Lunes '+ now.isoWeekday(1).date() + "-" + parseInt(now.month() + 1) ,
+						'Martes ' + now.isoWeekday(2).date() + "-" + parseInt(now.month() + 1),
+						'Miercoles ' + now.isoWeekday(3).date() + "-" + parseInt(now.month() + 1),
+						'Jueves ' + now.isoWeekday(4).date() + "-" + parseInt(now.month() + 1),
+						'Viernes ' + now.isoWeekday(5).date() + "-" + parseInt(now.month() + 1) ,
+						'Sabado ' + now.isoWeekday(6).date() + "-" + parseInt(now.month() + 1),
+						'Domingo ' + now.isoWeekday(7).date() + "-" + parseInt(now.month() + 1)],
 				columns:[
 					{
 					data: "hours",
@@ -91,7 +106,6 @@ define([
 		},
 		
 		addRow: function(){
-			console.log(this.handsomeTable.countRows());
 			this.handsomeTable.alter('insert_row', this.handsomeTable.countRows());
 		},
 		
