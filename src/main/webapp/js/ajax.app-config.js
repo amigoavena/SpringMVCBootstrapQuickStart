@@ -15,8 +15,6 @@ define([ 'jquery', 'backbone', 'underscore', 'bootstrap' ], function($,
 
 	var c = APP.Common;
 
-	console.log(c);
-
 	function APPAjax() {
 		// the array container to hold active ajax requests
 		this.pool = [];

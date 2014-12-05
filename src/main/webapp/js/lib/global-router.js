@@ -20,6 +20,7 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 		openViewDefault:function() {
 			var defaultView = c.findInArray(VIEWS,'isDefault',true);
 			this.openView(defaultView.id);
+			console.log("openning default");
 			APP.Router.navigate(defaultView.url);
 		},
 
@@ -31,6 +32,8 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 			var appParams = c.jsonParseUrl(window.location.search);
 			_.extend(viewObj.data,appParams);
 
+			console.log("openView");
+
 			if(viewId=== "login"){
 				var defaultView = c.findInArray(VIEWS,'isDefault',true);
 				this.openView(defaultView.id);
@@ -40,6 +43,8 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 				this.openView(defaultView.id);
 				amplify.publish('app:show:register');
 			} else {
+				console.log(viewId);
+				console.log(viewObj);
 				amplify.publish('app:show:view',viewId,viewObj);
 			}
 			

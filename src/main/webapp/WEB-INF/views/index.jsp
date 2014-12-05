@@ -19,7 +19,7 @@
 <script type="text/javascript" src="js/lib/backbone-min.js"></script>
 <script type="text/javascript" src="js/lib/amplify.min.js"></script>
 <title>My Sample Project</title>
-<script data-main="js/main" src="js/lib/require.js"></script>
+<script data-main="js/main.js" src="js/lib/require.js"></script>
 </head>
 <body>
 	<div class="container">

@@ -28,6 +28,11 @@ public class IndexController {
 		return "index";
 	}
 
+	@RequestMapping(value = "/avena")
+	public String avenaTest() {
+		return "ui";
+	}
+
 	@RequestMapping(value = "/admin/andale")
 	public String test1() {
 		return "index";

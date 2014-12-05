@@ -84,6 +84,7 @@ requirejs([ 'commons', 'router', 'layout_manager', 'facebook',  ], function(Comm
 	APP.Router = new Object();
 	_.extend(APP.Router, new Router());
 
+
 	FB.init({
 		appId : '782219015121928',
 		//appId: '782178938459269'

@@ -5,29 +5,11 @@ define([ 'views', 'json2', 'facebook' ], function(
 	var c = APP.Commons;
 
 	var AppManager = Backbone.View.extend({
-		/*	
-		routes : {
-			'' : 'defaultAction',
-			'match/:params' : 'openMatchView',
-			'matchEdit/:params' : 'openMatchEdit',
-			'matches' : 'openMatchesList',
-			'leagueAdmin' : 'openLeagueAdmin',
-			'admin' : 'openAdmin',
-			'profile' : 'openProfile'
-		// ':viewId' : 'openView',
-		// ':viewId/:params' : 'openView',
-		},*/
+
+		ajaxCalls:[],
 		currentView:null,
 		currentDialog:null,
 		el:$('#content'),
-
-		defaultAction : function() {
-			console.log("defaultAction");
-			var welcomeView = new Welcome({
-				el : $("#container")
-			});
-			welcomeView.render();
-		},
 
 		initCustomEvents:function(){
 			amplify.subscribe('fb:login:click', this.facebookClick);
@@ -62,27 +44,26 @@ define([ 'views', 'json2', 'facebook' ], function(
 				self.setAppTitleVer();
 				self.checkAppVersion();
 			});
-			$.when(this.ajaxCalls['get-current-user']).done(function(){
-				self.loadMenu();
-			});
+
 			*/
+			$.when(this.ajaxCalls['get-current-user']).done(function(){
+				console.log("getCurrentUser done!");
+				amplify.publish("user:loaded");
+			});
 		},
 
 		extraInitialize: function() {
 
-			$.ajax({
+			this.ajaxCalls['get-current-user'] = $.ajax({
 				type : "GET",
 				url : 'getUser',
 				contentType : "application/json; charset=utf-8",
 				success : function(data){
-					//console.log(data);
 					if(!c.isEmpty(data)){
 						console.log("extraInitialized");
 						APP.User = data;
 						amplify.publish("user:loaded");
 					}
-					//console.log(data);
-					//amplify.publish('admin:sport:changed');
 				},
 				dataType : 'json'
 			});
@@ -119,7 +100,6 @@ define([ 'views', 'json2', 'facebook' ], function(
 				contentType : "application/json; charset=utf-8",
 				success : function(data){
 					//console.log(data);
-					//amplify.publish('admin:sport:changed');
 				},
 				dataType : 'json'
 			});
@@ -139,53 +119,9 @@ define([ 'views', 'json2', 'facebook' ], function(
 				contentType : "application/json; charset=utf-8",
 				success : function(data){
 					//console.log(data);
-					//amplify.publish('admin:sport:changed');
 					amplify.publish("user:loaded");
 				},
 				dataType : 'json'
-			});
-		},
-
-		openMatchView : function(params) {
-			var data = c.urlToJSON(params);
-			var matchPageView = new Match({
-				el : $("#container"),
-				data : data
-			});
-		},
-
-		openMatchEdit : function(params) {
-			var data = c.urlToJSON(params);
-			var matchEditView = new MatchEdit({
-				el : $("#container"),
-				data : data
-			});
-		},
-
-		openLeagueAdmin : function(params) {
-			var data = c.urlToJSON(params);
-			var leagueAdminView = new LeagueAdmin({
-				el : $("#container"),
-				data : data
-			});
-		},
-
-		openProfile : function(params) {
-			var data = c.urlToJSON(params);
-			console.log("openingProfile");
-			var profileView = new Profile({
-				el : $("#container"),
-				data : data
-			});
-			console.log(APP.User);
-			profileView.render(APP.User);
-		},
-
-		openAdmin : function(params) {
-			var data = c.urlToJSON(params);
-			var adminView = new Admin({
-				el : $("#container"),
-				data : data
 			});
 		},
 		
