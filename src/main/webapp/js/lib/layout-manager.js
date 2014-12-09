@@ -1,5 +1,6 @@
 // Filename: app.js
-define([ 'views', 'json2', 'facebook' ], function(
+define([ 'views', 'json2'//, 'facebook' 
+	], function(
 		VIEWS ) {
 
 	var c = APP.Commons;
@@ -35,6 +36,7 @@ define([ 'views', 'json2', 'facebook' ], function(
 		render: function(){
 			console.log('AppLayout.render');
 			var self = this;
+			
 			//this.displayView();
 			/*
 			this.setupLayout();
@@ -44,8 +46,10 @@ define([ 'views', 'json2', 'facebook' ], function(
 				self.setAppTitleVer();
 				self.checkAppVersion();
 			});
-
 			*/
+
+			Backbone.history.start();
+
 			$.when(this.ajaxCalls['get-current-user']).done(function(){
 				console.log("getCurrentUser done!");
 				amplify.publish("user:loaded");

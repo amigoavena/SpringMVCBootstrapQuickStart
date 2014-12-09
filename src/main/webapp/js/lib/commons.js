@@ -1,6 +1,6 @@
 // Filename: app.js
 define(
-		[ 'json2' ],
+		[ 'jquery','json2' ],
 		function() {
 			
 			(function($) {

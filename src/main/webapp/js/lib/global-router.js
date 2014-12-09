@@ -1,7 +1,6 @@
 // Filename: app.js
-define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
-		'views/league.admin', 'views/profile', 'views/admin', 'json2', 'facebook' ], function(
-		VIEWS, Welcome, Match, MatchEdit, LeagueAdmin, Profile, Admin) {
+define([ 'views', 'json2' ], function(
+		VIEWS ) {
 
 	var c = APP.Commons;
 
@@ -43,11 +42,8 @@ define([ 'views', 'views/welcome', 'views/match', 'views/match.edit',
 				this.openView(defaultView.id);
 				amplify.publish('app:show:register');
 			} else {
-				console.log(viewId);
-				console.log(viewObj);
 				amplify.publish('app:show:view',viewId,viewObj);
 			}
-			
 			/*
 			switch(viewObj.type) {
 				case 'tab' 		: amplify.publish('app:show:tab',viewId,viewObj);break;

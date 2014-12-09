@@ -19,7 +19,6 @@ var REQJS_CONF = {
 		growl : 'lib/bootstrap-growl.min',
 		stomp : 'lib/stomp',
 		handsomeTable : 'lib/jquery.handsontable.full',
-		//facebook : '//connect.facebook.net/en_US/all',
 		bootstrapValidator : 'lib/bootstrapValidator',
 		bootbox : 'lib/bootbox.min',
 		moment : 'lib/moment.min',
@@ -65,54 +64,23 @@ var REQJS_CONF = {
 		},
 		'handsomeTable' : {
 			deps : [ 'jquery' ]
-		}/*,
-		'facebook' : {
-			exports : 'FB'
-		}*/
+		}
 	}
 }
 
-// _.extend(REQJS_CONF.paths,APP_LIBS.paths)
-// _.extend(REQJS_CONF.shim,APP_LIBS.shim)
-
 require.config(REQJS_CONF);
 
-requirejs([ 'commons', 'router', 'layout_manager', //'facebook',
-  ], function(Commons, Router, AppManager) {
+requirejs([ 'commons', 'router', 'layout_manager' ], function(Commons, Router, AppManager) {
 
 	_.extend(APP.Commons, new Commons());
 
 	APP.Router = new Object();
 
 	_.extend(APP.Router, new Router());
-
-	console.log(APP.Router);
 	
 	var app = new AppManager();
 	app.render();
 
-	Backbone.history.start({ silent: false });
 	console.log("history start?");
-
-	/*
-	FB.init({
-		appId : '782219015121928',
-		//appId: '782178938459269'
-	});
-	
-	/*FB.getLoginStatus(function(response) {
-		if(response.status === 'connected'){
-			amplify.publish('fb:login:callback',response);
-		}
-	});
-	
-	//FB.login()
-
-
-	$('#facebook-btn').click(function(event){
-		event.preventDefault();
-		$('#socialLoginModal').modal('hide');
-		amplify.publish('fb:login:click');
-	});*/
 
 });
