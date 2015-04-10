@@ -27,9 +27,9 @@ define([ 'views', 'json2'//, 'facebook'
 
 		initialize : function() {
 			c.backboneViewBindAll(this);
-			console.log("Layout Manager init");
-			this.initCustomEvents();
-			this.extraInitialize();
+			//console.log("Layout Manager init");
+			//this.initCustomEvents();
+			//this.extraInitialize();
 		},
 
 		// Render
@@ -46,14 +46,12 @@ define([ 'views', 'json2'//, 'facebook'
 				self.setAppTitleVer();
 				self.checkAppVersion();
 			});
+      $.when(this.ajaxCalls['get-current-user']).done(function(){
+        console.log("getCurrentUser done!");
+        amplify.publish("user:loaded");
+      });
 			*/
-
-			Backbone.history.start();
-
-			$.when(this.ajaxCalls['get-current-user']).done(function(){
-				console.log("getCurrentUser done!");
-				amplify.publish("user:loaded");
-			});
+			
 		},
 
 		extraInitialize: function() {

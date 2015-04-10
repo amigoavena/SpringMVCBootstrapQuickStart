@@ -77,10 +77,18 @@ requirejs([ 'commons', 'router', 'layout_manager' ], function(Commons, Router, A
 	APP.Router = new Object();
 
 	_.extend(APP.Router, new Router());
+
+	console.log(APP.Router);
 	
-	var app = new AppManager();
-	app.render();
+	//var app = new AppManager();
+	//app.render();
 
 	console.log("history start?");
+
+
+	//9APP.Router.index();
+
+	//
+	Backbone.history.start();
 
 });

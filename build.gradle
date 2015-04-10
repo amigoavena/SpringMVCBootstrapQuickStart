@@ -1,39 +1,23 @@
-apply plugin: 'java'
-apply plugin: 'war'
-apply plugin: 'eclipse'
-apply plugin: 'tomcat'
-
-tomcatRun.httpPort=12000
-
-springVersion="4.0.1.RELEASE"
-springSecurityVersion="3.2.0.RELEASE"
-
-buildscript {
-	repositories {
-		mavenCentral()
-		maven { url "http://download.java.net/maven/2" }
-		maven { url 'http://repo.spring.io/plugins-release' }
-	}
-
-	dependencies {
-		classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:0.9.8'
-		classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.1'
-	}
+plugins {  
+  id "org.akhikhl.gretty" version "1.2.0"
 }
+
+apply plugin: 'java'
+
+project.ext.springVersion="4.1.6.RELEASE"
+project.ext.springSecurityVersion="4.0.0.RELEASE"
 
 repositories { mavenCentral() }
 
-war.archiveName "gue.war"
+gretty {  
+	httpPort = 12000  
+}
+
+task wrapper(type: Wrapper) {  
+    gradleVersion = "2.3"  
+}
 
 dependencies {
-
-	def tomcatVersion = '7.0.52'
-	tomcat  "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
-			"org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
-	"org.apache.tomcat.embed:tomcat-embed-websocket:${tomcatVersion}"
-	tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
-		exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
-	}
 
 	//Data Connection
 	compile 'com.h2database:h2:1.3.175',
@@ -53,21 +37,21 @@ dependencies {
 	//WebSocket Support
 	compile 'org.springframework:spring-messaging:'+springVersion,
 			'org.springframework:spring-websocket:'+springVersion,
-			'com.fasterxml.jackson.core:jackson-databind:2.3.0'
+			'com.fasterxml.jackson.core:jackson-databind:2.5.2'
 
 	//Logging
-	compile 'log4j:log4j:1.2.14'
+	compile 'log4j:log4j:1.2.17'
 	
 	//Dozer Mapping
-	compile 'net.sf.dozer:dozer:5.4.0'
+	compile 'net.sf.dozer:dozer:5.5.1'
 
 	// Database Pooling
 	compile 'org.apache.tomcat:tomcat-jdbc:7.0.54',
 			'mysql:mysql-connector-java:5.1.6'
 	
-	runtime "org.slf4j:slf4j-log4j12:1.7.2"
+	compile "org.slf4j:slf4j-log4j12:1.7.12"
 
-	providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+	compile 'javax.servlet:javax.servlet-api:3.1.0'
 
 	testCompile("junit:junit:4.11")
 }

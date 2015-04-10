@@ -87,12 +87,14 @@ requirejs([ 'commons', 'router', 'layout_manager', //'facebook',
 	_.extend(APP.Router, new Router());
 
 	console.log(APP.Router);
+
+	console.log(APP.Router);
 	
 	var app = new AppManager();
-	app.render();
+	//app.render();
 
-	Backbone.history.start({ silent: false });
 	console.log("history start?");
+
 
 	/*
 	FB.init({

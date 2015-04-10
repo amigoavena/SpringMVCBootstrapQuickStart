@@ -40,6 +40,7 @@ public class IndexController {
 
 	@RequestMapping(value = "/")
 	public String displayHome() {
+		System.out.println("testing");
 		return "index";
 	}
 
