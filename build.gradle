@@ -19,6 +19,8 @@ task wrapper(type: Wrapper) {
 
 dependencies {
 
+	compile 'org.mybatis:mybatis:3.2.8'
+
 	//Data Connection
 	compile 'com.h2database:h2:1.3.175',
 			'org.springframework.data:spring-data-jpa:1.5.0.RELEASE',
