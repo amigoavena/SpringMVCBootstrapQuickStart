@@ -5,5 +5,5 @@
 .project
 /bin
 gradle.settings
-
+*.DS_Store
 *.log
