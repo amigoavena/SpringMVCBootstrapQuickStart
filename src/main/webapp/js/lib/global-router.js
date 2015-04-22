@@ -1,25 +1,20 @@
 // Filename: app.js
-define([ 'views' ], function( VIEWS ) {
+define([ 'views','json2' ], function( VIEWS ) {
 
 	var c = APP.Commons;
 
-	var Router = Backbone.Router.extend({
-		// map the hash urls with function calls
-
-		initialize:function(attribute){
-			console.log('Backbone.Router.initialize');
-		},
-
-		routes: {
-			'*page': 'index',
+	return Backbone.Router.extend({
+		routes : {
+			"" : "index",
 			'*page': 'index'
 		},
 
-		index: function () {
-			console.log('index page');
+		initialize:function(){
+			console.log("initialized");
+		},
+		
+		index : function() {
+			console.log("hello world");
 		}
-
 	});
-
-	return Router;
 });

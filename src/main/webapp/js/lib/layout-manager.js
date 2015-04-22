@@ -28,7 +28,7 @@ define([ 'views', 'json2'//, 'facebook'
 		initialize : function() {
 			c.backboneViewBindAll(this);
 			//console.log("Layout Manager init");
-			//this.initCustomEvents();
+			this.initCustomEvents();
 			//this.extraInitialize();
 		},
 

@@ -2,16 +2,18 @@
 var APP = APP || {
 	'User' : [],
 	'Commons' : [],
-	'Config' : []
+	'Config' : [],
+	'Views' : []
 };
 
 var REQJS_CONF = {
+	urlArgs: "v=1.0.0" ,
 	paths : {
 		jquery : 'lib/jquery-1.11.0.min',
 		underscore : 'lib/underscore-min',
 		backbone : 'lib/backbone-min',
 		json2 : 'lib/json2',
-		router : 'lib/global-router',
+		liRouter : 'lib/global-router',
 		layout_manager : 'lib/layout-manager',
 		bootstrap : 'lib/bootstrap.min',
 		commons : 'lib/commons',
@@ -70,25 +72,63 @@ var REQJS_CONF = {
 
 require.config(REQJS_CONF);
 
-requirejs([ 'commons', 'router', 'layout_manager' ], function(Commons, Router, AppManager) {
+requirejs([ 'layout_manager', 'commons', 'liRouter','views' ], function(AppManager, Commons, LiRouter, VIEWS ) {
 
 	_.extend(APP.Commons, new Commons());
 
+	_.extend(APP.Views, VIEWS);
+
 	APP.Router = new Object();
 
-	_.extend(APP.Router, new Router());
+	console.log(APP.Views);
 
-	console.log(APP.Router);
+	var appRouter = Backbone.Router.extend({
+
+		routes : {
+			""						: "openViewDefault"
+			,":viewId"				: "openView"
+			,":viewId/:params"		: "openView"
+			,'*path'				:  'openExtra'
+		},
+
+		initialize:function(){
+			console.log("initialized");
+		},
+		
+		openViewDefault:function() {
+			var defaultView = APP.Commons.findInArray(VIEWS,'isDefault',true);
+			this.openView(defaultView.id);
+			APP.Router.navigate(defaultView.url);
+		},
+
+		openExtra:function(path){
+			var viewId = path.substr(0,path.indexOf("/"));
+			var params = path.substr(path.indexOf("/")+1,path.length);
+			console.log("viewId="+viewId);
+			console.log("params="+params);
+			this.openView(viewId,params);
+		},
+
+		openView:function(viewId,params) {
+			var viewObj = APP.Commons.findInArray(VIEWS,'id',viewId);
+
+			viewObj.data = APP.Commons.jsonParseUrl(params);
+			viewObj.url = viewId + (!APP.Commons.isEmpty(params) ? '/' + params.replace("/", "%2F") : '');
+			// when there are params to be passed globally
+			var appParams = APP.Commons.jsonParseUrl(window.location.search);
+			_.extend(viewObj.data,appParams);
+
+			amplify.publish('app:show:view',viewId,viewObj);
+		}
+	});
+
+	_.extend(APP.Router, new appRouter());
+
+	console.log(APP.Router.routes);
 	
-	//var app = new AppManager();
-	//app.render();
+	var app = new AppManager();
+	app.render();
 
-	console.log("history start?");
-
-
-	//9APP.Router.index();
-
-	//
 	Backbone.history.start();
 
 });
