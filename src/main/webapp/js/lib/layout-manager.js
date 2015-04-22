@@ -254,7 +254,7 @@ define([ 'views', 'json2'//, 'facebook'
 			// force container to be empty
 			//console.log(_$container);
 			$(_$container).html('');
-			console.log(_data);
+			//console.log(_data);
 			// add the new view instance
 			newView = {
 				parent: _parent,

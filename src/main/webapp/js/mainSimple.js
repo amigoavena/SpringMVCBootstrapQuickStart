@@ -20,6 +20,7 @@ var REQJS_CONF = {
 		notify : 'lib/notify.min',
 		growl : 'lib/bootstrap-growl.min',
 		stomp : 'lib/stomp',
+		React : 'lib/react.min',
 		handsomeTable : 'lib/jquery.handsontable.full',
 		bootstrapValidator : 'lib/bootstrapValidator',
 		bootbox : 'lib/bootbox.min',
@@ -80,7 +81,7 @@ requirejs([ 'layout_manager', 'commons', 'liRouter','views' ], function(AppManag
 
 	APP.Router = new Object();
 
-	console.log(APP.Views);
+	//console.log(APP.Views);
 
 	var appRouter = Backbone.Router.extend({
 
@@ -123,8 +124,6 @@ requirejs([ 'layout_manager', 'commons', 'liRouter','views' ], function(AppManag
 	});
 
 	_.extend(APP.Router, new appRouter());
-
-	console.log(APP.Router.routes);
 	
 	var app = new AppManager();
 	app.render();
