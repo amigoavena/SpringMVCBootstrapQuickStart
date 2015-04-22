@@ -6,7 +6,7 @@
 <!-- Bootstrap core CSS -->
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrapValidator.min.css" rel="stylesheet">
 <link href="css/font/css/font-awesome.min.css" rel="stylesheet">
 <link href="css/bootstrap-social.css" rel="stylesheet">
@@ -14,7 +14,7 @@
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" media="screen" href="css/jquery.handsontable.full.css">
 <link href="css/main.css" rel="stylesheet">
-<script type="text/javascript" src="js/lib/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/lib/jquery.min.js"></script>
 <script type="text/javascript" src="js/lib/underscore-min.js"></script>
 <script type="text/javascript" src="js/lib/backbone-min.js"></script>
 <script type="text/javascript" src="js/lib/amplify.min.js"></script>

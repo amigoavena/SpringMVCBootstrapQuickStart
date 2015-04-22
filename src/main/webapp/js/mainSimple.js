@@ -9,11 +9,10 @@ var APP = APP || {
 var REQJS_CONF = {
 	urlArgs: "v=1.0.0" ,
 	paths : {
-		jquery : 'lib/jquery-1.11.0.min',
+		jquery : 'lib/jquery.min',
 		underscore : 'lib/underscore-min',
 		backbone : 'lib/backbone-min',
 		json2 : 'lib/json2',
-		liRouter : 'lib/global-router',
 		layout_manager : 'lib/layout-manager',
 		bootstrap : 'lib/bootstrap.min',
 		commons : 'lib/commons',
@@ -47,15 +46,16 @@ var REQJS_CONF = {
 		'bootstrap' : {
 			deps : [ 'jquery' ]
 		},
-		'notify' : {
-			deps : [ 'jquery' ]
-		},
 		'stomp' : {
 			deps : [ 'sockjs' ],
 			exports : 'Stomp'
 		},
-		'ajaxConfig' :  ['commons'],
-		'layout_manager' : ['ajaxConfig'],
+		'ajaxConfig' : {
+			deps : ['commons']
+		},
+		'layout_manager' : {
+			deps :['ajaxConfig']
+		},
 		'bootbox' : {
 			deps : [ 'jquery', 'bootstrap' ]
 		},
@@ -73,7 +73,7 @@ var REQJS_CONF = {
 
 require.config(REQJS_CONF);
 
-requirejs([ 'layout_manager', 'commons', 'liRouter','views' ], function(AppManager, Commons, LiRouter, VIEWS ) {
+requirejs([ 'layout_manager', 'commons', 'views' ], function(AppManager, Commons, VIEWS ) {
 
 	_.extend(APP.Commons, new Commons());
 
@@ -86,10 +86,10 @@ requirejs([ 'layout_manager', 'commons', 'liRouter','views' ], function(AppManag
 	var appRouter = Backbone.Router.extend({
 
 		routes : {
-			""						: "openViewDefault"
+			 ""						: "openViewDefault"
 			,":viewId"				: "openView"
 			,":viewId/:params"		: "openView"
-			,'*path'				:  'openExtra'
+			,"*path"				: "openExtra"
 		},
 
 		initialize:function(){
