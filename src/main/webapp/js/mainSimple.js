@@ -26,7 +26,7 @@ var REQJS_CONF = {
 		moment : 'lib/moment.min',
 		jstz : 'lib/jstz.min',
 		sockjs : 'lib/sockjs',
-		ajaxConfig : 'ajax.app-config',
+		ajaxConfig : 'ajax.config',
 		calendar : 'lib/calendar',
 		text : 'lib/text',
 		views : 'views'

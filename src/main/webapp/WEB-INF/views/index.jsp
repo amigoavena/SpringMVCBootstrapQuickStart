@@ -103,8 +103,8 @@
 								<div class="row">
 									<div class="col-md-12 text-center">
 										<p>
-											<a class="btn btn-block btn-social btn-google-plus"> <i
-												class="fa fa-google-plus"></i>Google
+											<a class="btn btn-block btn-social btn-google"> <i
+												class="fa fa-google"></i>Google
 											</a>
 										</p>
 									</div>
