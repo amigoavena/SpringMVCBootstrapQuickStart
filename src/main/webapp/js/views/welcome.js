@@ -6,18 +6,7 @@ define([
 	var WelcomeView = Backbone.View.extend({
 
 		render : function() {
-			//$(this.el).html(compiledTemplate);
-
-			var R = React.DOM;
-
-			var DividerClass = React.createClass({displayName: 'Divider',
-			  render: function () {
-			    return R.div({className: "divider"}, 
-			      R.h2(null, "Label Text"),
-			      R.hr()
-			    );
-			  }
-			});
+			$(this.el).html(compiledTemplate);
 		},
 		destroy : function() {
 			console.log("destroying View");
